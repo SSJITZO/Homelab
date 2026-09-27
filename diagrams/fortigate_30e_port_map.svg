@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 520" font-family="-apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title   { font-size: 21px; font-weight: 700; fill: #202124; }
+    .sub     { font-size: 12px; fill: #5f6368; }
+    .devtitle{ font-size: 14px; font-weight: 700; fill: #ffffff; }
+    .devmeta { font-size: 10.5px; fill: #fadbd8; }
+    .portnum { font-size: 11px; font-weight: 700; }
+    .portname{ font-size: 11.5px; font-weight: 600; fill: #202124; }
+    .portmeta{ font-size: 9.5px; fill: #5f6368; }
+    .grouptitle { font-size: 13px; font-weight: 700; fill: #3c4043; }
+    .note    { font-size: 10.5px; fill: #5f6368; }
+    .p-uplink { fill: #fdeceb; stroke: #ea6b5e; }
+    .p-attack { fill: #e8eaf6; stroke: #3949ab; }
+    .p-mgmt   { fill: #eef0f2; stroke: #9aa0a6; }
+    .p-empty  { fill: #fafafa; stroke: #dadce0; stroke-dasharray: 4 3; }
+    .box rect { stroke-width: 1.5; }
+    .line { stroke: #bdc1c6; stroke-width: 1.5; }
+  </style>
+
+  <rect x="0" y="0" width="880" height="520" fill="#ffffff"/>
+  <text class="title" x="30" y="34">FortiGate 30E &#8212; port map</text>
+  <text class="sub"   x="30" y="52">5 physical ports: 1&#215; GE WAN + 4&#215; GE LAN/switch &#183; isolated lab device, never internet-facing</text>
+
+  <!-- ============ FORTIGATE 30E ============ -->
+  <rect x="30" y="76" width="820" height="40" rx="8" fill="#d93025"/>
+  <text class="devtitle" x="46" y="102">FortiGate 30E</text>
+
+  <!-- WAN port -->
+  <g class="box p-uplink"><rect x="30" y="126" width="160" height="78" rx="6"/>
+    <text class="portnum" x="40" y="146" fill="#8a2c22">WAN (GE)</text>
+    <text class="portname" x="40" y="163">&#8594; Lab switch</text>
+    <text class="portmeta" x="40" y="178">(UniFi Flex Mini)</text>
+    <text class="portmeta" x="40" y="193">VLAN 50 Lab &#183; outbound only</text></g>
+
+  <!-- LAN 1 -->
+  <g class="box p-attack"><rect x="206" y="126" width="160" height="78" rx="6"/>
+    <text class="portnum" x="216" y="146" fill="#1a237e">LAN 1</text>
+    <text class="portname" x="216" y="163">Vulnerable target</text>
+    <text class="portmeta" x="216" y="178">Metasploitable2</text>
+    <text class="portmeta" x="216" y="193">the &#8220;victim&#8221;</text></g>
+
+  <!-- LAN 2 -->
+  <g class="box p-attack"><rect x="382" y="126" width="160" height="78" rx="6"/>
+    <text class="portnum" x="392" y="146" fill="#1a237e">LAN 2</text>
+    <text class="portname" x="392" y="163">Kali Linux box</text>
+    <text class="portmeta" x="392" y="178">Pi-based</text>
+    <text class="portmeta" x="392" y="193">the &#8220;attacker&#8221;</text></g>
+
+  <!-- LAN 3 -->
+  <g class="box p-empty"><rect x="558" y="126" width="160" height="78" rx="6"/>
+    <text class="portnum" x="568" y="146" fill="#80868b">LAN 3</text>
+    <text class="portname" x="568" y="163">Open</text>
+    <text class="portmeta" x="568" y="178">spare for next lab device</text></g>
+
+  <!-- LAN 4 -->
+  <g class="box p-mgmt"><rect x="690" y="126" width="160" height="78" rx="6"/>
+    <text class="portnum" x="700" y="146" fill="#3c4043">LAN 4</text>
+    <text class="portname" x="700" y="163">Laptop (temporary)</text>
+    <text class="portmeta" x="700" y="178">first-time GUI setup</text>
+    <text class="portmeta" x="700" y="193">or ongoing admin access</text></g>
+
+  <!-- Console port -->
+  <rect x="30" y="228" width="820" height="40" rx="8" fill="#9aa0a6"/>
+  <text class="devtitle" x="46" y="254">Console port (RJ45) &#8212; out-of-band CLI access via terminal program</text>
+
+  <!-- First-time setup notes -->
+  <rect x="30" y="292" width="820" height="98" rx="10" fill="#f8f9fa" stroke="#dadce0" stroke-width="1"/>
+  <text class="grouptitle" x="46" y="316">First-time setup</text>
+  <text class="note" x="46" y="336">Connect a laptop to LAN 1&#8211;4, set the laptop&#8217;s IP on 192.168.1.0/24, browse to https://192.168.1.99</text>
+  <text class="note" x="46" y="353">Default login: admin, no password &#8212; change this immediately, before connecting anything else</text>
+  <text class="note" x="46" y="370">The WAN port is configured last, once the lab switch and VLAN 50 are ready to receive it</text>
+
+  <!-- Security posture note -->
+  <rect x="30" y="402" width="820" height="98" rx="10" fill="#fce8e6" stroke="#d93025" stroke-width="1"/>
+  <text class="grouptitle" x="46" y="426" fill="#a50e0e">Security posture &#8212; why this wiring matters</text>
+  <text class="note" x="46" y="446">This hardware's firmware (FortiOS 6.2) stopped receiving security patches in 2023 &#8212; treat it as permanently unpatched</text>
+  <text class="note" x="46" y="463">Sitting two layers behind the UCG-Fiber (which is current and actively filtering) keeps exposure to outbound-only traffic</text>
+  <text class="note" x="46" y="480">Never port-forward anything to the WAN port &#8212; that is the one mistake that would turn stale firmware into a real risk</text>
+
+  <!-- Legend -->
+  <rect x="30"  y="500" width="13" height="13" rx="3" class="p-uplink"/>
+  <text class="portmeta" x="49"  y="511">Uplink (outbound only)</text>
+  <rect x="220" y="500" width="13" height="13" rx="3" class="p-attack"/>
+  <text class="portmeta" x="239" y="511">Attack range</text>
+  <rect x="360" y="500" width="13" height="13" rx="3" class="p-mgmt"/>
+  <text class="portmeta" x="379" y="511">Management access</text>
+  <rect x="540" y="500" width="13" height="13" rx="3" class="p-empty"/>
+  <text class="portmeta" x="559" y="511">Open / spare</text>
+</svg>

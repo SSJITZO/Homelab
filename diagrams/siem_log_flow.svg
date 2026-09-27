@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 660" font-family="-apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title   { font-size: 21px; font-weight: 700; fill: #202124; }
+    .sub     { font-size: 12px; fill: #5f6368; }
+    .srctitle{ font-size: 12.5px; font-weight: 700; }
+    .srcmeta { font-size: 10px; fill: #5f6368; }
+    .siemtitle { font-size: 16px; font-weight: 700; fill: #ffffff; }
+    .siemmeta  { font-size: 11px; fill: #e8eaf6; }
+    .grouptitle { font-size: 12.5px; font-weight: 700; fill: #3c4043; }
+    .note    { font-size: 10.5px; fill: #5f6368; }
+    .box rect { stroke-width: 1.5; }
+    .flow { stroke: #3949ab; stroke-width: 2; fill: none; marker-end: url(#fa); }
+    .src-net { fill: #e8f0fe; stroke: #4285f4; }
+    .src-ids { fill: #f3e8fd; stroke: #9334e6; }
+    .src-srv { fill: #e0f7f3; stroke: #12a594; }
+    .src-fw  { fill: #fdeceb; stroke: #ea6b5e; }
+    .src-ad  { fill: #fff3cd; stroke: #e0a200; }
+  </style>
+  <defs>
+    <marker id="fa" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#3949ab"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="960" height="660" fill="#ffffff"/>
+  <text class="title" x="30" y="34">SIEM &amp; log flow — the SOC core of the lab</text>
+  <text class="sub"   x="30" y="52">Every device ships logs to one SIEM. You triage alerts there, map them to MITRE ATT&amp;CK, and document investigations for your portfolio.</text>
+
+  <!-- LEFT: log sources -->
+  <text class="grouptitle" x="30" y="90">Log sources</text>
+
+  <g class="box src-fw">
+    <rect x="30" y="100" width="250" height="56" rx="8"/>
+    <text class="srctitle" x="44" y="124" fill="#8a2c22">UCG-Fiber gateway</text>
+    <text class="srcmeta" x="44" y="140">firewall logs, IDS/IPS events, traffic</text>
+  </g>
+  <g class="box src-ids">
+    <rect x="30" y="166" width="250" height="56" rx="8"/>
+    <text class="srctitle" x="44" y="190" fill="#4a0e8f">Pi 2 &#8212; Suricata + Zeek</text>
+    <text class="srcmeta" x="44" y="206">intrusion alerts, network metadata</text>
+  </g>
+  <g class="box src-net">
+    <rect x="30" y="232" width="250" height="56" rx="8"/>
+    <text class="srctitle" x="44" y="256" fill="#174ea6">Pi 1 &#8212; Pi-hole</text>
+    <text class="srcmeta" x="44" y="272">DNS query logs (malware C2 hunting)</text>
+  </g>
+  <g class="box src-srv">
+    <rect x="30" y="298" width="250" height="56" rx="8"/>
+    <text class="srctitle" x="44" y="322" fill="#0b5e54">Pi 3 + servers (Wazuh agent)</text>
+    <text class="srcmeta" x="44" y="338">endpoint / host logs, file integrity</text>
+  </g>
+  <g class="box src-ad">
+    <rect x="30" y="364" width="250" height="56" rx="8"/>
+    <text class="srctitle" x="44" y="388" fill="#7a5900">Windows Server / AD (VM)</text>
+    <text class="srcmeta" x="44" y="404">Windows event logs, logon/auth events</text>
+  </g>
+  <g class="box src-ids">
+    <rect x="30" y="430" width="250" height="56" rx="8"/>
+    <text class="srctitle" x="44" y="454" fill="#4a0e8f">Kali + vulnerable target (VM)</text>
+    <text class="srcmeta" x="44" y="470">generates the attacks you detect</text>
+  </g>
+
+  <!-- flows into SIEM -->
+  <path class="flow" d="M280,128 C360,128 360,300 452,310"/>
+  <path class="flow" d="M280,194 C370,194 370,315 452,322"/>
+  <path class="flow" d="M280,260 C400,260 410,320 452,330"/>
+  <path class="flow" d="M280,326 C400,326 410,330 452,338"/>
+  <path class="flow" d="M280,392 C370,392 370,345 452,346"/>
+  <path class="flow" d="M280,458 C360,458 360,360 452,356"/>
+
+  <!-- CENTER: SIEM -->
+  <rect x="452" y="270" width="220" height="118" rx="12" fill="#3949ab"/>
+  <text class="siemtitle" x="562" y="304" text-anchor="middle">SIEM</text>
+  <text class="siemmeta" x="562" y="326" text-anchor="middle">Wazuh or Security Onion</text>
+  <text class="siemmeta" x="562" y="344" text-anchor="middle">(VM on Proxmox)</text>
+  <text class="siemmeta" x="562" y="366" text-anchor="middle">collect &#183; correlate &#183; alert</text>
+
+  <!-- SIEM to analyst outputs -->
+  <path class="flow" d="M672,300 C720,300 720,150 748,150"/>
+  <path class="flow" d="M672,329 C720,329 720,329 748,329"/>
+  <path class="flow" d="M672,358 C720,358 720,508 748,508"/>
+
+  <!-- RIGHT: what you DO with it (the job skills) -->
+  <text class="grouptitle" x="748" y="96">What you practice (the job)</text>
+  <g class="box src-net">
+    <rect x="748" y="112" width="185" height="80" rx="8"/>
+    <text class="srctitle" x="762" y="134" fill="#174ea6">Alert triage</text>
+    <text class="srcmeta" x="762" y="152">monitor dashboard, sort</text>
+    <text class="srcmeta" x="762" y="167">real threats from false</text>
+    <text class="srcmeta" x="762" y="182">positives &#8212; the Tier-1 job</text>
+  </g>
+  <g class="box src-ids">
+    <rect x="748" y="290" width="185" height="80" rx="8"/>
+    <text class="srctitle" x="762" y="312" fill="#4a0e8f">Investigation</text>
+    <text class="srcmeta" x="762" y="330">dig into an alert, find the</text>
+    <text class="srcmeta" x="762" y="345">root cause, map it to</text>
+    <text class="srcmeta" x="762" y="360">MITRE ATT&amp;CK technique</text>
+  </g>
+  <g class="box src-srv">
+    <rect x="748" y="468" width="185" height="80" rx="8"/>
+    <text class="srctitle" x="762" y="490" fill="#0b5e54">Documentation</text>
+    <text class="srcmeta" x="762" y="508">write the investigation up</text>
+    <text class="srcmeta" x="762" y="523">&#8594; GitHub / blog portfolio</text>
+    <text class="srcmeta" x="762" y="538">(beats 3 certs to a recruiter)</text>
+  </g>
+
+  <!-- bottom note -->
+  <rect x="30" y="576" width="903" height="66" rx="10" fill="#f8f9fa" stroke="#dadce0" stroke-width="1"/>
+  <text class="grouptitle" x="46" y="598">The attack &#8594; detect loop (your headline portfolio project)</text>
+  <text class="note" x="46" y="617">Kali VM launches an attack on the vulnerable target &#8594; Suricata (Pi 2) + firewall catch it &#8594; logs flow to the SIEM &#8594;</text>
+  <text class="note" x="46" y="633">you triage &amp; investigate the alert &#8594; map to MITRE ATT&amp;CK &#8594; write it up. That single loop demonstrates the whole SOC skillset.</text>
+</svg>

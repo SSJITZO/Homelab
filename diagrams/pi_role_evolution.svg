@@ -1,0 +1,129 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 760" font-family="-apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title   { font-size: 22px; font-weight: 700; fill: #202124; }
+    .sub     { font-size: 12.5px; fill: #5f6368; }
+    .colhead { font-size: 15px; font-weight: 700; }
+    .pi      { font-size: 13.5px; font-weight: 700; }
+    .role    { font-size: 11.5px; fill: #202124; }
+    .meta    { font-size: 10.5px; fill: #5f6368; }
+    .tag     { font-size: 10px; font-weight: 600; }
+    .arrow   { stroke: #9aa0a6; stroke-width: 2; marker-end: url(#ah); }
+    .card rect { stroke-width: 1.5; }
+    .keep    { fill: #e7f6ea; stroke: #34a853; }
+    .change  { fill: #fef3e0; stroke: #f4a000; }
+    .new     { fill: #e8eaf6; stroke: #3949ab; }
+  </style>
+  <defs>
+    <marker id="ah" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#9aa0a6"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1000" height="760" fill="#ffffff"/>
+  <text class="title" x="30" y="36">Raspberry Pi fleet — before &amp; after the security-focused pivot</text>
+  <text class="sub"   x="30" y="56">Same 4 Pis. The heavy new pieces (SIEM, Active Directory, Kali) live as VMs on Proxmox, not on the Pis.</text>
+
+  <!-- Column headers -->
+  <text class="colhead" x="250" y="90" text-anchor="middle" fill="#5f6368">BEFORE (media/network homelab)</text>
+  <text class="colhead" x="750" y="90" text-anchor="middle" fill="#1a237e">AFTER (job-skills / SOC homelab)</text>
+  <line x1="500" y1="76" x2="500" y2="620" stroke="#e0e0e0" stroke-width="1" stroke-dasharray="4 4"/>
+
+  <!-- ===== PI 1 ===== -->
+  <g class="card">
+    <rect x="30" y="106" width="440" height="108" rx="10" class="keep"/>
+    <text class="pi" x="46" y="130" fill="#1e5631">Pi 1 — Network Guardian</text>
+    <text class="role" x="46" y="150">Pi-hole (ad-block DNS)</text>
+    <text class="role" x="46" y="167">WireGuard VPN (PiVPN)</text>
+    <text class="role" x="46" y="184">Invidious (optional)</text>
+    <text class="meta" x="46" y="203">VLAN 10 Trusted · 192.168.10.20</text>
+  </g>
+  <line class="arrow" x1="472" y1="160" x2="528" y2="160"/>
+  <g class="card">
+    <rect x="530" y="106" width="440" height="108" rx="10" class="keep"/>
+    <text class="tag" x="946" y="126" text-anchor="end" fill="#1e5631">KEEP AS-IS</text>
+    <text class="pi" x="546" y="130" fill="#1e5631">Pi 1 — Network Guardian</text>
+    <text class="role" x="546" y="150">Same jobs — Pi-hole + WireGuard</text>
+    <text class="meta" x="546" y="169">NEW ROLE: becomes a log source — its DNS query</text>
+    <text class="meta" x="546" y="184">logs feed the SIEM (great for spotting malware</text>
+    <text class="meta" x="546" y="199">calling home via DNS). Already done + working.</text>
+  </g>
+
+  <!-- ===== PI 2 ===== -->
+  <g class="card">
+    <rect x="30" y="228" width="440" height="118" rx="10" class="change"/>
+    <text class="pi" x="46" y="252" fill="#8a5000">Pi 2 — Security Lab</text>
+    <text class="role" x="46" y="272">Suricata IDS</text>
+    <text class="role" x="46" y="289">nftables firewall practice</text>
+    <text class="meta" x="46" y="308">(No Hailo — dropped as unnecessary for entry-level SOC roles)</text>
+    <text class="meta" x="46" y="325">VLAN 50 Lab · 192.168.50.20</text>
+  </g>
+  <line class="arrow" x1="472" y1="287" x2="528" y2="287"/>
+  <g class="card">
+    <rect x="530" y="228" width="440" height="118" rx="10" class="change"/>
+    <text class="tag" x="946" y="248" text-anchor="end" fill="#8a5000">UPGRADE ROLE — DONE</text>
+    <text class="pi" x="546" y="252" fill="#8a5000">Pi 2 — IDS Sensor</text>
+    <text class="role" x="546" y="272">Suricata built + nftables built &amp; verified</text>
+    <text class="meta" x="546" y="291">NEXT: ship its alerts/logs INTO the SIEM once it</text>
+    <text class="meta" x="546" y="306">exists. Now it&#8217;s a real sensor you triage from</text>
+    <text class="meta" x="546" y="321">a dashboard, like the actual job.</text>
+    <text class="meta" x="546" y="338">Also next: port mirroring so it sees all traffic.</text>
+  </g>
+
+  <!-- ===== PI 3 ===== -->
+  <g class="card">
+    <rect x="30" y="360" width="440" height="118" rx="10" class="change"/>
+    <text class="pi" x="46" y="384" fill="#8a5000">Pi 3 — Self-Hosted Apps</text>
+    <text class="role" x="46" y="404">Docker: Vaultwarden (passwords)</text>
+    <text class="role" x="46" y="421">Nextcloud (files)</text>
+    <text class="role" x="46" y="438">*arr stack (media automation)</text>
+    <text class="meta" x="46" y="457">VLAN 20 Servers · 192.168.20.30</text>
+  </g>
+  <line class="arrow" x1="472" y1="419" x2="528" y2="419"/>
+  <g class="card">
+    <rect x="530" y="360" width="440" height="118" rx="10" class="change"/>
+    <text class="tag" x="946" y="380" text-anchor="end" fill="#8a5000">SPLIT PURPOSE</text>
+    <text class="pi" x="546" y="384" fill="#8a5000">Pi 3 — Apps + Log Shipper</text>
+    <text class="role" x="546" y="404">Keep Vaultwarden + Nextcloud (real services)</text>
+    <text class="meta" x="546" y="423">NEW: run a log shipper (e.g. Wazuh agent / Beats)</text>
+    <text class="meta" x="546" y="438">so this box&#8217;s own logs flow to the SIEM too —</text>
+    <text class="meta" x="546" y="453">practices endpoint monitoring. Drop *arr if you</text>
+    <text class="meta" x="546" y="468">want it leaner; it&#8217;s the least career-relevant piece.</text>
+  </g>
+
+  <!-- ===== PI 4 ===== -->
+  <g class="card">
+    <rect x="30" y="492" width="440" height="112" rx="10" class="keep"/>
+    <text class="pi" x="46" y="516" fill="#1e5631">Pi 4 — Monitoring</text>
+    <text class="role" x="46" y="536">Grafana + Prometheus</text>
+    <text class="role" x="46" y="553">node_exporter + Uptime Kuma</text>
+    <text class="meta" x="46" y="572">drives the rack dashboards</text>
+    <text class="meta" x="46" y="591">VLAN 20 Servers · 192.168.20.40</text>
+  </g>
+  <line class="arrow" x1="472" y1="548" x2="528" y2="548"/>
+  <g class="card">
+    <rect x="530" y="492" width="440" height="112" rx="10" class="keep"/>
+    <text class="tag" x="946" y="512" text-anchor="end" fill="#1e5631">KEEP AS-IS</text>
+    <text class="pi" x="546" y="516" fill="#1e5631">Pi 4 — Monitoring / Observability</text>
+    <text class="role" x="546" y="536">Same Grafana + Prometheus stack</text>
+    <text class="meta" x="546" y="555">Observability IS a real sysadmin skill — keep it.</text>
+    <text class="meta" x="546" y="570">Complements the SIEM: Grafana = system health,</text>
+    <text class="meta" x="546" y="585">SIEM = security events. Good story for interviews.</text>
+  </g>
+
+  <!-- ===== NEW: Proxmox VMs ===== -->
+  <rect x="30" y="626" width="940" height="112" rx="10" class="new"/>
+  <text class="tag" x="952" y="648" text-anchor="end" fill="#1a237e">NEW — LIVES ON PROXMOX (mini PC), NOT A PI</text>
+  <text class="pi" x="46" y="650" fill="#1a237e">The heavy new career pieces run as VMs on your mini PC</text>
+  <text class="role" x="46" y="674">🛡  SIEM VM — Wazuh or Security Onion (collects all logs, alert triage) — the #1 SOC skill</text>
+  <text class="role" x="46" y="694">🪟  Windows Server + Active Directory VM — the enterprise environment sysadmin &amp; security jobs expect</text>
+  <text class="role" x="46" y="714">⚔  Kali Linux VM + vulnerable target — the attack&#8594;detect loop you document for your portfolio</text>
+  <text class="meta" x="46" y="731">These are too heavy for a Pi — Proxmox is exactly the right home, and running them is itself a resume skill.</text>
+
+  <!-- Legend -->
+  <rect x="30" y="748" width="12" height="12" rx="3" class="keep"/>
+  <text class="meta" x="48" y="758">Keep as-is</text>
+  <rect x="150" y="748" width="12" height="12" rx="3" class="change"/>
+  <text class="meta" x="168" y="758">Repurpose / upgrade</text>
+  <rect x="320" y="748" width="12" height="12" rx="3" class="new"/>
+  <text class="meta" x="338" y="758">New (on Proxmox)</text>
+</svg>

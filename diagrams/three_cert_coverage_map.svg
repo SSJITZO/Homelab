@@ -1,0 +1,170 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 940" font-family="-apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title   { font-size: 22px; font-weight: 700; fill: #202124; }
+    .sub     { font-size: 12.5px; fill: #5f6368; }
+    .colhead { font-size: 15px; font-weight: 700; fill: #ffffff; }
+    .itemtitle { font-size: 12px; font-weight: 700; }
+    .itemmeta  { font-size: 10.5px; fill: #5f6368; }
+    .grouptitle { font-size: 13px; font-weight: 700; fill: #3c4043; }
+    .note    { font-size: 10.5px; fill: #5f6368; }
+    .badge   { font-size: 9px; font-weight: 700; fill: #ffffff; }
+    .card rect { stroke-width: 1.5; }
+    .done    { fill: #e7f6ea; stroke: #34a853; }
+    .todo    { fill: #fef3e0; stroke: #f4a000; }
+    .newcard { fill: #e8eaf6; stroke: #3949ab; }
+  </style>
+
+  <rect x="0" y="0" width="1040" height="940" fill="#ffffff"/>
+  <text class="title" x="30" y="34">Three-cert coverage map — Network+, Security+, Cloud+</text>
+  <text class="sub"   x="30" y="53">What your homelab already proves, and exactly what to add so all three certs are genuinely earned by this one project.</text>
+
+  <!-- Column headers -->
+  <rect x="30"  y="72" width="230" height="34" rx="8" fill="#34a853"/>
+  <text class="colhead" x="145" y="94" text-anchor="middle">✅ Already built</text>
+  <rect x="270" y="72" width="230" height="34" rx="8" fill="#f4a000"/>
+  <text class="colhead" x="385" y="94" text-anchor="middle">🔲 Planned, not built</text>
+  <rect x="510" y="72" width="230" height="34" rx="8" fill="#3949ab"/>
+  <text class="colhead" x="625" y="94" text-anchor="middle">➕ New — Cloud+ additions</text>
+  <rect x="750" y="72" width="260" height="34" rx="8" fill="#5f6368"/>
+  <text class="colhead" x="880" y="94" text-anchor="middle">Certs it covers</text>
+
+  <!-- ROW 1: Networking basics -->
+  <g class="card done"><rect x="30" y="116" width="230" height="66" rx="8"/>
+    <text class="itemtitle" x="42" y="136" fill="#1e5631">VLANs + segmentation</text>
+    <text class="itemmeta" x="42" y="152">UniFi, 6 VLANs, firewall zones</text>
+    <text class="itemmeta" x="42" y="166">Pro XG / Flex switches</text>
+  </g>
+  <g class="card done"><rect x="270" y="116" width="230" height="66" rx="8" fill="none" stroke="none"/></g>
+  <g class="card done"><rect x="510" y="116" width="230" height="66" rx="8" fill="none" stroke="none"/></g>
+  <g><rect x="750" y="116" width="260" height="66" rx="8" fill="#f8f9fa" stroke="#dadce0"/>
+    <text class="itemmeta" x="762" y="140">Network+ (core) &#183; Cloud+ (networking domain)</text>
+    <text class="itemmeta" x="762" y="156">Security+ (segmentation as control)</text>
+  </g>
+
+  <!-- ROW 2: Firewall/VPN/NAT -->
+  <g class="card done"><rect x="30" y="190" width="230" height="66" rx="8"/>
+    <text class="itemtitle" x="42" y="210" fill="#1e5631">Firewall + VPN + NAT</text>
+    <text class="itemmeta" x="42" y="226">UniFi zone firewall, WireGuard,</text>
+    <text class="itemmeta" x="42" y="240">bridge/passthrough troubleshooting</text>
+  </g>
+  <g><rect x="750" y="190" width="260" height="66" rx="8" fill="#f8f9fa" stroke="#dadce0"/>
+    <text class="itemmeta" x="762" y="214">Network+ &#183; Security+ (VPN, NAT concepts)</text>
+    <text class="itemmeta" x="762" y="230">Cloud+ (network security domain)</text>
+  </g>
+
+  <!-- ROW 3: IDS -->
+  <g class="card done"><rect x="30" y="264" width="230" height="66" rx="8"/>
+    <text class="itemtitle" x="42" y="284" fill="#1e5631">IDS sensor (Pi 2)</text>
+    <text class="itemmeta" x="42" y="300">Suricata, verified w/ test alert</text>
+    <text class="itemmeta" x="42" y="314">nftables firewall, verified</text>
+  </g>
+  <g><rect x="750" y="264" width="260" height="66" rx="8" fill="#f8f9fa" stroke="#dadce0"/>
+    <text class="itemmeta" x="762" y="288">Security+ (core — threat detection)</text>
+    <text class="itemmeta" x="762" y="304">Cloud+ (security domain — EDR-adjacent)</text>
+  </g>
+
+  <!-- ROW 4: Virtualization -->
+  <g class="card done"><rect x="30" y="338" width="230" height="66" rx="8"/>
+    <text class="itemtitle" x="42" y="358" fill="#1e5631">Virtualization (Proxmox)</text>
+    <text class="itemmeta" x="42" y="374">Hypervisor host, storage</text>
+    <text class="itemmeta" x="42" y="388">integration w/ NAS (SMB)</text>
+  </g>
+  <g><rect x="750" y="338" width="260" height="66" rx="8" fill="#f8f9fa" stroke="#dadce0"/>
+    <text class="itemmeta" x="762" y="362">Cloud+ (CORE — 42% of exam weight is</text>
+    <text class="itemmeta" x="762" y="378">Architecture + Deployment, incl. virtualization)</text>
+  </g>
+
+  <!-- ROW 5: SIEM -->
+  <g class="card todo"><rect x="270" y="412" width="230" height="66" rx="8"/>
+    <text class="itemtitle" x="282" y="432" fill="#7a5900">SIEM (Wazuh/Sec. Onion)</text>
+    <text class="itemmeta" x="282" y="448">VM on Proxmox, collects all</text>
+    <text class="itemmeta" x="282" y="462">logs, alert triage</text>
+  </g>
+  <g><rect x="750" y="412" width="260" height="66" rx="8" fill="#f8f9fa" stroke="#dadce0"/>
+    <text class="itemmeta" x="762" y="436">Security+ (CORE — log analysis, SOC ops)</text>
+    <text class="itemmeta" x="762" y="452">Cloud+ (security domain — monitoring)</text>
+  </g>
+
+  <!-- ROW 6: Windows AD -->
+  <g class="card todo"><rect x="270" y="486" width="230" height="66" rx="8"/>
+    <text class="itemtitle" x="282" y="506" fill="#7a5900">Windows Server + AD</text>
+    <text class="itemmeta" x="282" y="522">VM on Proxmox &#8212; domain,</text>
+    <text class="itemmeta" x="282" y="536">users, GPOs, join a client</text>
+  </g>
+  <g><rect x="750" y="486" width="260" height="66" rx="8" fill="#f8f9fa" stroke="#dadce0"/>
+    <text class="itemmeta" x="762" y="510">Security+ (CORE — IAM, identity mgmt)</text>
+    <text class="itemmeta" x="762" y="526">Network+ (directory services, auth)</text>
+  </g>
+
+  <!-- ROW 7: Attack range -->
+  <g class="card todo"><rect x="270" y="560" width="230" height="66" rx="8"/>
+    <text class="itemtitle" x="282" y="580" fill="#7a5900">Kali + vulnerable target</text>
+    <text class="itemmeta" x="282" y="596">VMs on Proxmox &#8212; the</text>
+    <text class="itemmeta" x="282" y="610">attack&#8594;detect loop</text>
+  </g>
+  <g><rect x="750" y="560" width="260" height="66" rx="8" fill="#f8f9fa" stroke="#dadce0"/>
+    <text class="itemmeta" x="762" y="584">Security+ (CORE — attacks, MITRE ATT&amp;CK)</text>
+    <text class="itemmeta" x="762" y="600">Portfolio centerpiece for all 3 certs</text>
+  </g>
+
+  <!-- ROW 8: Kubernetes -->
+  <g class="card newcard"><rect x="510" y="116" width="230" height="66" rx="8"/>
+    <text class="itemtitle" x="522" y="136" fill="#1a237e">Kubernetes (k3s)</text>
+    <text class="itemmeta" x="522" y="152">Lightweight k3s on Pi 3/4</text>
+    <text class="itemmeta" x="522" y="166">or Proxmox VMs &#8212; $0 cost</text>
+  </g>
+  <g><rect x="750" y="116" width="0" height="0"/></g>
+
+  <!-- ROW: Terraform -->
+  <g class="card newcard"><rect x="510" y="190" width="230" height="66" rx="8"/>
+    <text class="itemtitle" x="522" y="210" fill="#1a237e">Terraform (IaC)</text>
+    <text class="itemmeta" x="522" y="226">Define &amp; apply Proxmox VMs</text>
+    <text class="itemmeta" x="522" y="240">as code instead of GUI clicks</text>
+  </g>
+
+  <!-- ROW: Public/hybrid cloud -->
+  <g class="card newcard"><rect x="510" y="264" width="230" height="66" rx="8"/>
+    <text class="itemtitle" x="522" y="284" fill="#1a237e">AWS or Azure free tier</text>
+    <text class="itemmeta" x="522" y="300">1 small hybrid project linking</text>
+    <text class="itemmeta" x="522" y="314">homelab &#8594; public cloud</text>
+  </g>
+
+  <!-- Combined row for k3s/Terraform/cloud cert coverage -->
+  <g><rect x="750" y="116" width="260" height="264" rx="8" fill="#eef0ff" stroke="#3949ab" stroke-dasharray="4 3"/>
+    <text class="itemtitle" x="762" y="140" fill="#1a237e">Cloud+ — the pieces your lab was</text>
+    <text class="itemtitle" x="762" y="156" fill="#1a237e">genuinely missing before today:</text>
+    <text class="itemmeta" x="762" y="180">&#8226; Containerization (K8s) is now CORE</text>
+    <text class="itemmeta" x="762" y="196">&#160;&#160;to the 2026 exam, not optional</text>
+    <text class="itemmeta" x="762" y="216">&#8226; Infrastructure as Code is newly</text>
+    <text class="itemmeta" x="762" y="232">&#160;&#160;emphasized in CV0-004</text>
+    <text class="itemmeta" x="762" y="252">&#8226; Public/hybrid cloud concepts simply</text>
+    <text class="itemmeta" x="762" y="268">&#160;&#160;can't be proven on-prem alone &#8212;</text>
+    <text class="itemmeta" x="762" y="284">&#160;&#160;this is the one true gap closed</text>
+    <text class="itemmeta" x="762" y="304">These 3 additions turn "on-prem</text>
+    <text class="itemmeta" x="762" y="320">homelab" into a genuine hybrid-cloud</text>
+    <text class="itemmeta" x="762" y="336">portfolio piece.</text>
+    <text class="itemmeta" x="762" y="360">$0 cost &#8212; k3s is free, Terraform is</text>
+    <text class="itemmeta" x="762" y="376">free, Azure Always-Free tier is free.</text>
+  </g>
+
+  <!-- Bottom summary bar -->
+  <rect x="30" y="656" width="980" height="140" rx="10" fill="#f8f9fa" stroke="#dadce0" stroke-width="1"/>
+  <text class="grouptitle" x="46" y="680">The honest math</text>
+  <text class="note" x="46" y="700">Network+: your existing build already demonstrates the large majority of hands-on objectives (VLANs, DHCP, DNS, NAT,</text>
+  <text class="note" x="46" y="716">firewalls, troubleshooting, AD/directory services once built). Remaining gap is mostly memorization (OSI model, ports, WAN theory).</text>
+  <text class="note" x="46" y="738">Security+: SIEM + Windows AD + the attack range close the last real gaps. Once built, you'll have hands-on IAM, threat</text>
+  <text class="note" x="46" y="754">detection, log analysis, and incident response — the exact domains the exam weights heaviest.</text>
+  <text class="note" x="46" y="776">Cloud+: virtualization (Proxmox) was already strong. k3s + Terraform + one AWS/Azure free-tier project closes the rest —</text>
+  <text class="note" x="46" y="792">containerization, IaC, and public/hybrid cloud are the three objectives no on-prem-only lab can otherwise prove.</text>
+
+  <!-- Legend -->
+  <rect x="30" y="812" width="14" height="14" rx="3" class="done"/>
+  <text class="itemmeta" x="50" y="823">Already built &amp; working</text>
+  <rect x="220" y="812" width="14" height="14" rx="3" class="todo"/>
+  <text class="itemmeta" x="240" y="823">Planned (SOC pivot), not yet built</text>
+  <rect x="460" y="812" width="14" height="14" rx="3" class="newcard"/>
+  <text class="itemmeta" x="480" y="823">New — added today for Cloud+</text>
+
+  <text class="note" x="30" y="855">Suggested build order: SIEM &#8594; Windows AD &#8594; Kali/attack range &#8594; k3s &#8594; Terraform &#8594; 1 AWS/Azure hybrid project.</text>
+  <text class="note" x="30" y="872">Each step is independently useful, so the order can flex around what excites you most or what's cheapest/fastest to stand up next.</text>
+</svg>

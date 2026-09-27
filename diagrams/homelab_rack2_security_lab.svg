@@ -1,0 +1,149 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 560" font-family="-apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 21px; font-weight: 700; fill: #202124; }
+    .sub   { font-size: 12px; fill: #5f6368; }
+    .t     { font-size: 13px; font-weight: 600; }
+    .s     { font-size: 11px; fill: #5f6368; }
+    .u     { font-size: 11px; font-weight: 600; fill: #80868b; }
+    .ulab  { font-size: 9.5px; fill: #9aa0a6; text-anchor: end; }
+    .grouptitle { font-size: 12.5px; font-weight: 700; fill: #3c4043; }
+    .note  { font-size: 11px; fill: #80868b; }
+    .security   { fill: #fce8e6; stroke: #d93025; }
+    .security .t{ fill: #a50e0e; }
+    .net        { fill: #e0f7f3; stroke: #12a594; }
+    .net .t     { fill: #0b5e54; }
+    .screen     { fill: #f3e8fd; stroke: #9334e6; }
+    .screen .t  { fill: #4a0e8f; }
+    .power      { fill: #e7f6ea; stroke: #34a853; }
+    .power .t   { fill: #1e5631; }
+    .infra      { fill: #eef0f2; stroke: #9aa0a6; }
+    .infra .t   { fill: #3c4043; }
+    .elsewhere  { fill: #fef6e0; stroke: #e0a200; }
+    .elsewhere .t { fill: #7a5900; }
+    .attack     { fill: #e8eaf6; stroke: #3949ab; }
+    .attack .t  { fill: #1a237e; }
+    .box rect { stroke-width: 1.5; }
+  </style>
+
+  <rect x="0" y="0" width="820" height="560" fill="#ffffff"/>
+
+  <text class="title" x="40" y="38">Security &amp; AI Lab — 8U rack (Rack 2)</text>
+  <text class="sub" x="40" y="56">GeeekPi 8U &#183; DeskPi RackMate T1 Plus &#183; 10.23&#8243; depth &#183; physically isolated from production</text>
+
+  <!-- Rack frame -->
+  <rect x="40" y="74" width="344" height="432" rx="12" fill="none" stroke="#bdc1c6" stroke-width="1.5"/>
+
+  <!-- U labels -->
+  <text class="ulab" x="35" y="111">U8</text>
+  <text class="ulab" x="35" y="154">U7</text>
+  <text class="ulab" x="35" y="197">U6</text>
+  <text class="ulab" x="35" y="240">U5</text>
+  <text class="ulab" x="35" y="283">U4</text>
+  <text class="ulab" x="35" y="326">U3</text>
+  <text class="ulab" x="35" y="369">U2</text>
+  <text class="ulab" x="35" y="412">U1</text>
+
+  <!-- U8 FortiGate -->
+  <g class="box security">
+    <rect x="52" y="88" width="320" height="40" rx="6"/>
+    <text class="t" x="64" y="106">FortiGate 30E (+ rack tray)</text>
+    <text class="s" x="64" y="120">isolated lab firewall &#8212; never internet-facing</text>
+    <text class="u" x="360" y="112" text-anchor="end">1U</text>
+  </g>
+
+  <!-- U7 Lab switch -->
+  <g class="box net">
+    <rect x="52" y="131" width="320" height="40" rx="6"/>
+    <text class="t" x="64" y="149">Small lab switch (e.g. UniFi Flex Mini)</text>
+    <text class="s" x="64" y="163">dedicated &#8212; one uplink only to Rack 1</text>
+    <text class="u" x="360" y="155" text-anchor="end">1U</text>
+  </g>
+
+  <!-- U6 Patch panel -->
+  <g class="box infra">
+    <rect x="52" y="174" width="320" height="40" rx="6"/>
+    <text class="t" x="64" y="192">Small patch panel</text>
+    <text class="s" x="64" y="206">terminates lab cabling separately</text>
+    <text class="u" x="360" y="198" text-anchor="end">1U</text>
+  </g>
+
+  <!-- U5 Display -->
+  <g class="box screen">
+    <rect x="52" y="217" width="320" height="40" rx="6"/>
+    <text class="t" x="64" y="235">DeskPi 6.91&#8243; bar display</text>
+    <text class="s" x="64" y="249">Suricata alerts / FortiGate dashboard, live</text>
+    <text class="u" x="360" y="241" text-anchor="end">1U</text>
+  </g>
+
+  <!-- U4 Fan panel -->
+  <g class="box infra">
+    <rect x="52" y="260" width="320" height="40" rx="6"/>
+    <text class="t" x="64" y="278">Cooling fan panel</text>
+    <text class="s" x="64" y="292">small frame, several warm appliances</text>
+    <text class="u" x="360" y="284" text-anchor="end">1U</text>
+  </g>
+
+  <!-- U3 PDU -->
+  <g class="box power">
+    <rect x="52" y="303" width="320" height="40" rx="6"/>
+    <text class="t" x="64" y="321">PDU</text>
+    <text class="s" x="64" y="335">power for this rack only</text>
+    <text class="u" x="360" y="327" text-anchor="end">1U</text>
+  </g>
+
+  <!-- U2 Vulnerable target -->
+  <g class="box attack">
+    <rect x="52" y="346" width="320" height="40" rx="6"/>
+    <text class="t" x="64" y="364">Vulnerable target &#8212; Metasploitable2</text>
+    <text class="s" x="64" y="378">intentionally exploitable &#8212; the &#8220;victim&#8221;</text>
+    <text class="u" x="360" y="370" text-anchor="end">1U</text>
+  </g>
+
+  <!-- U1 Kali box -->
+  <g class="box attack">
+    <rect x="52" y="389" width="320" height="40" rx="6"/>
+    <text class="t" x="64" y="407">Kali Linux box (Pi-based)</text>
+    <text class="s" x="64" y="421">offensive practice &#8212; the &#8220;attacker&#8221;</text>
+    <text class="u" x="360" y="413" text-anchor="end">1U</text>
+  </g>
+
+  <!-- Right column -->
+  <text class="grouptitle" x="412" y="92">Optional addition</text>
+  <g class="box net">
+    <rect x="412" y="102" width="312" height="58" rx="8"/>
+    <text class="t" x="426" y="126">Relocate Pi 2 here from Rack 1</text>
+    <text class="s" x="426" y="143">Suricata IDS + nftables &#8212; full physical + logical isolation</text>
+  </g>
+
+  <text class="grouptitle" x="412" y="186">Connection back to production</text>
+  <g class="box elsewhere">
+    <rect x="412" y="196" width="312" height="58" rx="8"/>
+    <text class="t" x="426" y="220">Single uplink &#8594; Rack 1, Pro XG switch</text>
+    <text class="s" x="426" y="237">only path in/out &#8212; internet access, nothing else</text>
+  </g>
+
+  <text class="grouptitle" x="412" y="280">Why a separate switch matters</text>
+  <text class="s" x="412" y="300">Lab traffic never touches the production</text>
+  <text class="s" x="412" y="315">Pro XG or Flex 2.5G switches &#8212; zero risk of</text>
+  <text class="s" x="412" y="330">an accidental cross-wire while experimenting.</text>
+
+  <text class="note" x="412" y="370">This rack mirrors how real segmented security</text>
+  <text class="note" x="412" y="385">labs are built: isolated hardware, not just VLANs.</text>
+
+  <!-- Legend -->
+  <line x1="40" y1="460" x2="784" y2="460" stroke="#e0e0e0" stroke-width="1"/>
+  <rect x="40" y="474" width="13" height="13" rx="3" fill="#fce8e6" stroke="#d93025" stroke-width="1.5"/>
+  <text class="s" x="59" y="484">Security appliance</text>
+  <rect x="200" y="474" width="13" height="13" rx="3" fill="#e0f7f3" stroke="#12a594" stroke-width="1.5"/>
+  <text class="s" x="219" y="484">Networking</text>
+  <rect x="320" y="474" width="13" height="13" rx="3" fill="#f3e8fd" stroke="#9334e6" stroke-width="1.5"/>
+  <text class="s" x="339" y="484">Display</text>
+  <rect x="420" y="474" width="13" height="13" rx="3" fill="#e7f6ea" stroke="#34a853" stroke-width="1.5"/>
+  <text class="s" x="439" y="484">Power</text>
+  <rect x="500" y="474" width="13" height="13" rx="3" fill="#eef0f2" stroke="#9aa0a6" stroke-width="1.5"/>
+  <text class="s" x="519" y="484">Infrastructure</text>
+  <rect x="630" y="474" width="13" height="13" rx="3" fill="#fef6e0" stroke="#e0a200" stroke-width="1.5"/>
+  <text class="s" x="649" y="484">Link to Rack 1</text>
+  <rect x="40" y="500" width="13" height="13" rx="3" fill="#e8eaf6" stroke="#3949ab" stroke-width="1.5"/>
+  <text class="s" x="59" y="510">Attack range (victim / attacker)</text>
+</svg>

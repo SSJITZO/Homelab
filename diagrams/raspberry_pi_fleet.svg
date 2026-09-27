@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 860" font-family="-apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif">
+  <style>
+    .title   { font-size: 21px; font-weight: 700; fill: #202124; }
+    .sub     { font-size: 12px; fill: #5f6368; }
+    .cardtitle { font-size: 14px; font-weight: 700; fill: #ffffff; }
+    .seclabel  { font-size: 10.5px; font-weight: 700; }
+    .line      { font-size: 10.5px; fill: #3c4043; }
+    .grouptitle{ font-size: 13px; font-weight: 700; fill: #3c4043; }
+    .note      { font-size: 10.5px; fill: #5f6368; }
+    .card rect { stroke-width: 1.5; }
+  </style>
+
+  <rect x="0" y="0" width="900" height="860" fill="#ffffff"/>
+  <text class="title" x="30" y="34">Raspberry Pi fleet — SOC / security-focused build</text>
+  <text class="sub"   x="30" y="52">Each Pi feeds logs into the SIEM (on Proxmox). Heavy pieces — SIEM, Active Directory, Kali — run as Proxmox VMs, not on Pis.</text>
+
+  <!-- ============ PI 1 — Network Guardian + Log Source (Trusted, blue) ============ -->
+  <g>
+    <rect x="30" y="76" width="410" height="300" rx="10" fill="#e8f0fe" stroke="#4285f4" stroke-width="1.5"/>
+    <rect x="30" y="76" width="410" height="40" rx="10" fill="#4285f4"/>
+    <rect x="30" y="96" width="410" height="20" fill="#4285f4"/>
+    <text class="cardtitle" x="46" y="102">Pi 1 &#8212; Network Guardian</text>
+
+    <text class="seclabel" x="46" y="134" fill="#174ea6">Software</text>
+    <text class="line" x="46" y="150">Pi-hole (DNS / ad-block)</text>
+    <text class="line" x="46" y="165">WireGuard via PiVPN (remote VPN)</text>
+
+    <text class="seclabel" x="46" y="189" fill="#174ea6">SOC role</text>
+    <text class="line" x="46" y="205">Log source &#8594; SIEM (DNS query logs)</text>
+    <text class="line" x="46" y="220">catches malware calling home via DNS</text>
+
+    <text class="seclabel" x="46" y="244" fill="#174ea6">Network</text>
+    <text class="line" x="46" y="260">VLAN 10 &#183; Trusted &#183; firewall: ufw</text>
+    <text class="line" x="46" y="275">DNS (53) open to all VLANs</text>
+
+    <text class="seclabel" x="46" y="299" fill="#174ea6">Status / location</text>
+    <text class="line" x="46" y="315">DONE &#8212; running on NVMe</text>
+    <text class="line" x="46" y="330">Flex 2.5G, port 2 &#183; 192.168.10.20</text>
+  </g>
+
+  <!-- ============ PI 2 — IDS Sensor (Lab, purple) ============ -->
+  <g>
+    <rect x="460" y="76" width="410" height="300" rx="10" fill="#f3e8fd" stroke="#9334e6" stroke-width="1.5"/>
+    <rect x="460" y="76" width="410" height="40" rx="10" fill="#9334e6"/>
+    <rect x="460" y="96" width="410" height="20" fill="#9334e6"/>
+    <text class="cardtitle" x="476" y="102">Pi 2 &#8212; IDS Sensor</text>
+
+    <text class="seclabel" x="476" y="134" fill="#4a0e8f">Software</text>
+    <text class="line" x="476" y="150">Suricata IDS &#8212; installed, verified w/ test alert</text>
+    <text class="line" x="476" y="165">nftables firewall &#8212; installed &amp; verified</text>
+    <text class="line" x="476" y="180">Raspberry Pi OS (no Hailo &#8212; dropped, unneeded)</text>
+
+    <text class="seclabel" x="476" y="204" fill="#4a0e8f">SOC role</text>
+    <text class="line" x="476" y="220">Next: ships alerts &#8594; SIEM for triage</text>
+    <text class="line" x="476" y="235">the &#8220;sensor&#8221; you investigate from a dashboard</text>
+
+    <text class="seclabel" x="476" y="259" fill="#4a0e8f">Network</text>
+    <text class="line" x="476" y="275">VLAN 50 &#183; Lab &#183; VLAN-tagged eth0.50</text>
+    <text class="line" x="476" y="290">isolated except internet</text>
+
+    <text class="seclabel" x="476" y="314" fill="#4a0e8f">Status / location</text>
+    <text class="line" x="476" y="330">DONE &#183; Flex 2.5G, port 1 &#183; 192.168.50.20</text>
+  </g>
+
+  <!-- ============ PI 3 — Apps + Log Shipper (Servers, teal) ============ -->
+  <g>
+    <rect x="30" y="396" width="410" height="300" rx="10" fill="#e0f7f3" stroke="#12a594" stroke-width="1.5"/>
+    <rect x="30" y="396" width="410" height="40" rx="10" fill="#12a594"/>
+    <rect x="30" y="416" width="410" height="20" fill="#12a594"/>
+    <text class="cardtitle" x="46" y="422">Pi 3 &#8212; Apps + Log Shipper</text>
+
+    <text class="seclabel" x="46" y="454" fill="#0b5e54">Software</text>
+    <text class="line" x="46" y="470">Docker host</text>
+    <text class="line" x="46" y="485">Vaultwarden (passwords) &#183; Nextcloud (files)</text>
+    <text class="line" x="46" y="500">(drop *arr stack to stay lean &#8212; optional)</text>
+
+    <text class="seclabel" x="46" y="524" fill="#0b5e54">SOC role</text>
+    <text class="line" x="46" y="540">Runs a log shipper (Wazuh agent / Beats)</text>
+    <text class="line" x="46" y="555">&#8594; practices endpoint monitoring into SIEM</text>
+
+    <text class="seclabel" x="46" y="579" fill="#0b5e54">Network</text>
+    <text class="line" x="46" y="595">VLAN 20 &#183; Servers &#183; firewall: ufw</text>
+
+    <text class="seclabel" x="46" y="619" fill="#0b5e54">Status / location</text>
+    <text class="line" x="46" y="635">TODO &#183; Flex 2.5G, port 3 &#183; 192.168.20.30</text>
+  </g>
+
+  <!-- ============ PI 4 — Monitoring (Servers, teal) ============ -->
+  <g>
+    <rect x="460" y="396" width="410" height="300" rx="10" fill="#e0f7f3" stroke="#12a594" stroke-width="1.5"/>
+    <rect x="460" y="396" width="410" height="40" rx="10" fill="#12a594"/>
+    <rect x="460" y="416" width="410" height="20" fill="#12a594"/>
+    <text class="cardtitle" x="476" y="422">Pi 4 &#8212; Monitoring</text>
+
+    <text class="seclabel" x="476" y="454" fill="#0b5e54">Software</text>
+    <text class="line" x="476" y="470">Grafana + Prometheus + node_exporter</text>
+    <text class="line" x="476" y="485">Uptime Kuma</text>
+
+    <text class="seclabel" x="476" y="509" fill="#0b5e54">SOC / sysadmin role</text>
+    <text class="line" x="476" y="525">Observability (system health) &#8212; complements</text>
+    <text class="line" x="476" y="540">the SIEM (security events). Real sysadmin skill.</text>
+
+    <text class="seclabel" x="476" y="564" fill="#0b5e54">Network</text>
+    <text class="line" x="476" y="580">VLAN 20 &#183; Servers &#183; scrapes 9100 on all nodes</text>
+
+    <text class="seclabel" x="476" y="604" fill="#0b5e54">Status / location</text>
+    <text class="line" x="476" y="620">TODO &#183; Flex 2.5G, port 4 &#183; 192.168.20.40</text>
+    <text class="line" x="476" y="635">feeds both rack screens</text>
+  </g>
+
+  <!-- ===== NEW: Proxmox VMs ===== -->
+  <rect x="30" y="716" width="840" height="112" rx="10" fill="#e8eaf6" stroke="#3949ab" stroke-width="1.5"/>
+  <text class="seclabel" x="852" y="738" text-anchor="end" fill="#1a237e">NEW &#8212; PROXMOX VMs (mini PC), NOT PIs</text>
+  <text class="grouptitle" x="46" y="740" fill="#1a237e">The career-defining pieces run as VMs on the mini PC</text>
+  <text class="line" x="46" y="762">&#128737;  SIEM VM &#8212; Wazuh or Security Onion (collects all logs above, alert triage) &#8212; the #1 SOC skill</text>
+  <text class="line" x="46" y="782">&#129323;  Windows Server + Active Directory VM &#8212; the enterprise environment sysadmin &amp; security jobs expect</text>
+  <text class="line" x="46" y="802">&#9876;  Kali Linux VM + vulnerable target &#8212; the attack&#8594;detect loop you document for your portfolio</text>
+  <text class="note" x="46" y="820">Too heavy for a Pi &#8212; Proxmox is the right home, and running them is itself a resume skill.</text>
+</svg>
