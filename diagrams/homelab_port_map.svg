@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 1120" font-family="-apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 900" font-family="-apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif">
   <style>
     .title   { font-size: 21px; font-weight: 700; fill: #202124; }
     .sub     { font-size: 12px; fill: #5f6368; }
@@ -16,49 +16,41 @@
     .p-lab    { fill: #f3e8fd; stroke: #9334e6; }
     .p-poe    { fill: #fff3cd; stroke: #e0a200; }
     .p-empty  { fill: #fafafa; stroke: #dadce0; stroke-dasharray: 4 3; }
+    .p-planned{ fill: #fafafa; stroke: #9aa0a6; stroke-dasharray: 2 3; }
     .box rect { stroke-width: 1.5; }
     .line { stroke: #bdc1c6; stroke-width: 1.5; }
   </style>
 
-  <rect x="0" y="0" width="980" height="1120" fill="#ffffff"/>
-  <text class="title" x="30" y="34">Port map — what plugs into what</text>
-  <text class="sub"   x="30" y="52">UCG-Fiber gateway &#8594; Pro XG 8 PoE (core) &#8594; Flex 2.5G PoE (access) &#183; ASUS downstairs &#8594; switch upstairs</text>
+  <rect x="0" y="0" width="980" height="900" fill="#ffffff"/>
+  <text class="title" x="30" y="34">Port map — what plugs into what (new home)</text>
+  <text class="sub"   x="30" y="52">Comcast/Xfinity modem &#8594; UCG-Fiber gateway (&#8220;GOAT&#8221;) &#8594; Pro XG 8 PoE (core) &#8594; Flex 2.5G PoE (access) &#183; single-level layout, no downstairs/upstairs split</text>
 
-  <!-- ============ UCG-FIBER ============ -->
+  <!-- ============ UCG-FIBER GATEWAY ============ -->
   <rect x="30" y="76" width="920" height="40" rx="8" fill="#1a73e8"/>
-  <text class="devtitle" x="46" y="102">UniFi UCG-Fiber &#8212; gateway</text>
+  <text class="devtitle" x="46" y="102">UniFi UCG-Fiber &#8212; gateway (named &#8220;GOAT&#8221; in controller)</text>
 
-  <g class="box p-uplink">
-    <rect x="30" y="126" width="150" height="56" rx="6"/>
-    <text class="portnum" x="40" y="144" fill="#8a2c22">WAN (10G RJ45)</text>
-    <text class="portname" x="40" y="160">AT&amp;T BGW320</text>
-    <text class="portmeta" x="40" y="173">internet in</text>
-  </g>
-  <g class="box p-uplink">
-    <rect x="190" y="126" width="150" height="56" rx="6"/>
-    <text class="portnum" x="200" y="144" fill="#8a2c22">LAN (SFP+ 10G)</text>
-    <text class="portname" x="200" y="160">&#8594; Pro XG, SFP+ port 9</text>
-    <text class="portmeta" x="200" y="173">via SFP+ DAC cable</text>
-  </g>
-  <g class="box p-empty">
-    <rect x="350" y="126" width="150" height="56" rx="6"/>
-    <text class="portnum" x="360" y="144" fill="#80868b">2.5GbE #1&#8211;3</text>
-    <text class="portname" x="360" y="160">Open</text>
-    <text class="portmeta" x="360" y="173">spare for future device</text>
-  </g>
-  <g class="box p-empty">
-    <rect x="510" y="126" width="150" height="56" rx="6"/>
-    <text class="portnum" x="520" y="144" fill="#80868b">2.5GbE #4 (PoE+)</text>
-    <text class="portname" x="520" y="160">Open</text>
-    <text class="portmeta" x="520" y="173">30W PoE+ available</text>
-  </g>
-  <g class="box p-empty">
-    <rect x="670" y="126" width="150" height="56" rx="6"/>
-    <text class="portnum" x="680" y="144" fill="#80868b">WAN SFP+</text>
-    <text class="portname" x="680" y="160">Open</text>
-    <text class="portmeta" x="680" y="173">reserved for future fiber</text>
-  </g>
-  <line class="line" x1="265" y1="182" x2="265" y2="216"/>
+  <g class="box p-uplink"><rect x="30" y="126" width="140" height="56" rx="6"/>
+    <text class="portnum" x="38" y="144" fill="#8a2c22">Port 5 (RJ45, PoE+)</text>
+    <text class="portname" x="38" y="160">&#8592; Comcast Cable</text>
+    <text class="portmeta" x="38" y="173">Xfinity modem &#183; WAN in</text></g>
+  <g class="box p-empty"><rect x="180" y="126" width="140" height="56" rx="6"/>
+    <text class="portnum" x="188" y="144" fill="#80868b">Ports 1&#8211;3</text>
+    <text class="portname" x="188" y="160">Open</text>
+    <text class="portmeta" x="188" y="173">iPhone/PS4 formerly here, now disconnected</text></g>
+  <g class="box p-empty"><rect x="330" y="126" width="140" height="56" rx="6"/>
+    <text class="portnum" x="338" y="144" fill="#80868b">Port 4 (PoE+)</text>
+    <text class="portname" x="338" y="160">Open</text>
+    <text class="portmeta" x="338" y="173">spare PoE+ port</text></g>
+  <g class="box p-empty"><rect x="480" y="126" width="140" height="56" rx="6"/>
+    <text class="portnum" x="488" y="144" fill="#80868b">SFP+ 1</text>
+    <text class="portname" x="488" y="160">Open</text>
+    <text class="portmeta" x="488" y="173">reserved for future fiber</text></g>
+  <g class="box p-uplink"><rect x="630" y="126" width="140" height="56" rx="6"/>
+    <text class="portnum" x="638" y="144" fill="#8a2c22">SFP+ 2</text>
+    <text class="portname" x="638" y="160">&#8594; Pro XG, port 9</text>
+    <text class="portmeta" x="638" y="173">10G uplink to core switch</text></g>
+
+  <line class="line" x1="700" y1="182" x2="700" y2="216"/>
 
   <!-- ============ PRO XG 8 POE — CORE SWITCH ============ -->
   <rect x="30" y="216" width="920" height="40" rx="8" fill="#12a594"/>
@@ -71,65 +63,66 @@
   <g class="box p-servers"><rect x="142" y="266" width="106" height="64" rx="6"/>
     <text class="portnum" x="150" y="284" fill="#0b5e54">Port 2</text>
     <text class="portname" x="150" y="299">UGREEN NAS</text>
-    <text class="portmeta" x="150" y="312">VLAN 20 VLAN 20 &#183; Servers#183; 192.168.20.0/24</text></g>
+    <text class="portmeta" x="150" y="312">VLAN 20 &#183; Servers &#183; 192.168.20.0/24</text></g>
   <g class="box p-servers"><rect x="254" y="266" width="106" height="64" rx="6"/>
     <text class="portnum" x="262" y="284" fill="#0b5e54">Port 3</text>
-    <text class="portname" x="262" y="299">Mini PC (Kamrui)</text>
-    <text class="portmeta" x="262" y="312">VLAN 20 VLAN 20 &#183; via Sabrent#183; 192.168.20.0/24</text></g>
+    <text class="portname" x="262" y="299">Proxmox (Mini PC)</text>
+    <text class="portmeta" x="262" y="312">VLAN 20 &#183; Servers &#183; 192.168.20.0/24</text></g>
   <g class="box p-trusted"><rect x="366" y="266" width="106" height="64" rx="6"/>
     <text class="portnum" x="374" y="284" fill="#174ea6">Port 4</text>
-    <text class="portname" x="374" y="299">&#8594; ASUS Router</text>
-    <text class="portmeta" x="374" y="312">WAN/LAN-1 WAN/LAN-1 &#183; VLAN 10#183; 192.168.10.0/24</text></g>
+    <text class="portname" x="374" y="299">ASUS AP (aiboard)</text>
+    <text class="portmeta" x="374" y="312">VLAN 10 &#183; Trusted &#183; AP/bridge mode</text></g>
   <g class="box p-empty"><rect x="478" y="266" width="106" height="64" rx="6"/>
     <text class="portnum" x="486" y="284" fill="#80868b">Port 5</text>
     <text class="portname" x="486" y="299">Open</text>
     <text class="portmeta" x="486" y="312">spare 10G</text></g>
-  <g class="box p-poe"><rect x="590" y="266" width="106" height="64" rx="6"/>
-    <text class="portnum" x="598" y="284" fill="#7a5900">Port 6</text>
-    <text class="portname" x="598" y="299">&#8594; Flex 2.5G</text>
-    <text class="portmeta" x="598" y="312">PoE ON &#183; powers the Flex</text></g>
-  <g class="box p-empty"><rect x="702" y="266" width="106" height="64" rx="6"/>
-    <text class="portnum" x="710" y="284" fill="#80868b">Port 7</text>
-    <text class="portname" x="710" y="299">Open</text>
-    <text class="portmeta" x="710" y="312">spare 10G</text></g>
-  <g class="box p-empty"><rect x="814" y="266" width="106" height="64" rx="6"/>
-    <text class="portnum" x="822" y="284" fill="#80868b">Port 8</text>
-    <text class="portname" x="822" y="299">Open</text>
-    <text class="portmeta" x="822" y="312">spare 10G</text></g>
+  <g class="box p-empty"><rect x="590" y="266" width="106" height="64" rx="6"/>
+    <text class="portnum" x="598" y="284" fill="#80868b">Port 6</text>
+    <text class="portname" x="598" y="299">Open</text>
+    <text class="portmeta" x="598" y="312">spare 10G</text></g>
+  <g class="box p-mgmt"><rect x="702" y="266" width="106" height="64" rx="6"/>
+    <text class="portnum" x="710" y="284" fill="#3c4043">Port 7</text>
+    <text class="portname" x="710" y="299">Mgmt device</text>
+    <text class="portmeta" x="710" y="312">VLAN 1 &#183; Management &#183; admin access</text></g>
+  <g class="box p-poe"><rect x="814" y="266" width="106" height="64" rx="6"/>
+    <text class="portnum" x="822" y="284" fill="#7a5900">Port 8</text>
+    <text class="portname" x="822" y="299">&#8594; Flex 2.5G</text>
+    <text class="portmeta" x="822" y="312">PoE ON &#183; powers the Flex</text></g>
 
   <g class="box p-uplink"><rect x="30" y="338" width="106" height="46" rx="6"/>
     <text class="portnum" x="38" y="356" fill="#8a2c22">SFP+ 9</text>
-    <text class="portname" x="38" y="372">&#8592; Gateway, DAC cable</text></g>
+    <text class="portname" x="38" y="372">&#8592; Gateway, SFP+2</text></g>
   <g class="box p-empty"><rect x="142" y="338" width="106" height="46" rx="6"/>
     <text class="portnum" x="150" y="356" fill="#80868b">SFP+ 10</text>
     <text class="portname" x="150" y="372">Open</text></g>
+  <text class="note" x="280" y="363">Laptop currently plugs into the end port of this 10G switch for UniFi management</text>
 
   <line class="line" x1="643" y1="384" x2="643" y2="416"/>
 
   <!-- ============ FLEX 2.5G POE — ACCESS SWITCH ============ -->
   <rect x="30" y="416" width="920" height="40" rx="8" fill="#0b5e54"/>
-  <text class="devtitle" x="46" y="442">UniFi Flex 2.5G PoE &#8212; access switch (8&#215; 2.5GbE + 1&#215; combo)</text>
+  <text class="devtitle" x="46" y="442">UniFi Flex 2.5G PoE &#8212; access switch (8&#215; 2.5GbE + 1&#215; combo) &#8212; the Pi fleet lives here</text>
 
   <g class="box p-lab"><rect x="30"  y="466" width="106" height="64" rx="6"/>
     <text class="portnum" x="38" y="484" fill="#4a0e8f">Port 1</text>
-    <text class="portname" x="38" y="499">Pi 2 (security lab)</text>
-    <text class="portmeta" x="38" y="512">VLAN 50 VLAN 50 &#183; Lab, isolated#183; 192.168.50.0/24</text></g>
+    <text class="portname" x="38" y="499">Pi 2 (pi2-lab)</text>
+    <text class="portmeta" x="38" y="512">VLAN 50 &#183; Lab &#183; Suricata IDS &#8212; LIVE</text></g>
   <g class="box p-trusted"><rect x="142" y="466" width="106" height="64" rx="6"/>
     <text class="portnum" x="150" y="484" fill="#174ea6">Port 2</text>
-    <text class="portname" x="150" y="499">Pi 1 (Pi-hole+VPN)</text>
-    <text class="portmeta" x="150" y="512">VLAN 10 VLAN 10 VLAN 10 &#183; Trusted#183; 192.168.10.0/24#183; 192.168.10.0/24</text></g>
-  <g class="box p-servers"><rect x="254" y="466" width="106" height="64" rx="6"/>
-    <text class="portnum" x="262" y="484" fill="#0b5e54">Port 3</text>
-    <text class="portname" x="262" y="499">Pi 3 (Docker apps)</text>
-    <text class="portmeta" x="262" y="512">VLAN 20 VLAN 20 &#183; Servers#183; 192.168.20.0/24</text></g>
-  <g class="box p-servers"><rect x="366" y="466" width="106" height="64" rx="6"/>
-    <text class="portnum" x="374" y="484" fill="#0b5e54">Port 4</text>
-    <text class="portname" x="374" y="499">Pi 4 (monitoring)</text>
-    <text class="portmeta" x="374" y="512">VLAN 20 VLAN 20 &#183; Servers#183; 192.168.20.0/24</text></g>
+    <text class="portname" x="150" y="499">Pi 1 (pi1-guardian)</text>
+    <text class="portmeta" x="150" y="512">VLAN 10 &#183; Trusted &#183; Pi-hole+VPN &#8212; LIVE</text></g>
+  <g class="box p-planned"><rect x="254" y="466" width="106" height="64" rx="6"/>
+    <text class="portnum" x="262" y="484" fill="#5f6368">Port 3</text>
+    <text class="portname" x="262" y="499">Pi 3 &#8212; not built</text>
+    <text class="portmeta" x="262" y="512">planned: Vaultwarden/Nextcloud</text></g>
+  <g class="box p-planned"><rect x="366" y="466" width="106" height="64" rx="6"/>
+    <text class="portnum" x="374" y="484" fill="#5f6368">Port 4</text>
+    <text class="portname" x="374" y="499">Pi 4 &#8212; not built</text>
+    <text class="portmeta" x="374" y="512">planned: Grafana/Prometheus</text></g>
   <g class="box p-mgmt"><rect x="478" y="466" width="106" height="64" rx="6"/>
     <text class="portnum" x="486" y="484" fill="#3c4043">Port 5</text>
     <text class="portname" x="486" y="499">JetKVM</text>
-    <text class="portmeta" x="486" y="512">VLAN 1 VLAN 1 &#183; Management#183; 192.168.1.0/24</text></g>
+    <text class="portmeta" x="486" y="512">VLAN 1 &#183; Management &#183; FE (100Mb) link</text></g>
   <g class="box p-empty"><rect x="590" y="466" width="106" height="64" rx="6"/>
     <text class="portnum" x="598" y="484" fill="#80868b">Port 6</text>
     <text class="portname" x="598" y="499">Open</text>
@@ -143,87 +136,38 @@
     <text class="portname" x="822" y="499">Open</text>
     <text class="portmeta" x="822" y="512">spare</text></g>
 
-  <g class="box p-poe"><rect x="30" y="538" width="180" height="46" rx="6"/>
-    <text class="portnum" x="38" y="556" fill="#7a5900">Port 9 &#8212; combo, &#8220;PoE In, 10G&#8221;</text>
-    <text class="portname" x="38" y="572">&#8592; Pro XG, port 6</text></g>
-  <text class="note" x="222" y="563">SFP+ or 10GbE RJ45 &#8212; one cable carries the uplink AND powers this switch (no USB-C brick needed)</text>
-
-  <line class="line" x1="350" y1="584" x2="350" y2="612"/>
-
-  <!-- ============ ASUS ROUTER (downstairs, AP/bridge mode) ============ -->
-  <rect x="30" y="612" width="920" height="40" rx="8" fill="#4285f4"/>
-  <text class="devtitle" x="46" y="638">ASUS GT-BE19000AI &#8212; downstairs, AP/bridge mode</text>
-
-  <g class="box p-trusted"><rect x="30" y="662" width="140" height="64" rx="6"/>
-    <text class="portnum" x="38" y="680" fill="#174ea6">WAN/LAN-1</text>
-    <text class="portname" x="38" y="696">&#8592; Pro XG, port 4</text>
-    <text class="portmeta" x="38" y="709">uplink &#183; 2.5G</text></g>
-  <g class="box p-empty"><rect x="184" y="662" width="140" height="64" rx="6"/>
-    <text class="portnum" x="192" y="680" fill="#80868b">LAN-2/3/4</text>
-    <text class="portname" x="192" y="696">Open</text>
-    <text class="portmeta" x="192" y="709">spare, near rack</text></g>
-  <g class="box p-empty"><rect x="338" y="662" width="140" height="64" rx="6"/>
-    <text class="portnum" x="346" y="680" fill="#80868b">10G port</text>
-    <text class="portname" x="346" y="696">Open</text>
-    <text class="portmeta" x="346" y="709">spare, near rack</text></g>
-  <g class="box p-empty"><rect x="492" y="662" width="140" height="64" rx="6"/>
-    <text class="portnum" x="500" y="680" fill="#80868b">LAN-5 (1G)</text>
-    <text class="portname" x="500" y="696">Open</text>
-    <text class="portmeta" x="500" y="709">spare, near rack</text></g>
-  <g class="box p-trusted"><rect x="646" y="662" width="290" height="64" rx="6"/>
-    <text class="portnum" x="654" y="680" fill="#174ea6">LAN-6 &#8220;Gaming Port&#8221; (10G)</text>
-    <text class="portname" x="654" y="696">&#8594; runs upstairs to room jack</text>
-    <text class="portmeta" x="654" y="709">QoS labeling inactive in AP mode &#8212; used here just for the 10G speed</text></g>
-
-  <line class="line" x1="790" y1="726" x2="790" y2="760"/>
-
-  <!-- ============ UPSTAIRS — 5-PORT SWITCH ============ -->
-  <rect x="30" y="760" width="920" height="40" rx="8" fill="#9aa0a6"/>
-  <text class="devtitle" x="46" y="786">Upstairs &#8212; unmanaged 5-port switch (in your room)</text>
-
-  <g class="box p-trusted"><rect x="30" y="810" width="160" height="64" rx="6"/>
-    <text class="portnum" x="38" y="828" fill="#174ea6">Port 1</text>
-    <text class="portname" x="38" y="844">&#8592; wall jack</text>
-    <text class="portmeta" x="38" y="857">from ASUS LAN-6 downstairs</text></g>
-  <g class="box p-trusted"><rect x="210" y="810" width="160" height="64" rx="6"/>
-    <text class="portnum" x="218" y="828" fill="#174ea6">Port 2</text>
-    <text class="portname" x="218" y="844">Gaming PC</text>
-    <text class="portmeta" x="218" y="857">single NAT single NAT &#183; VLAN 10#183; 192.168.10.0/24</text></g>
-  <g class="box p-trusted"><rect x="390" y="810" width="160" height="64" rx="6"/>
-    <text class="portnum" x="398" y="828" fill="#174ea6">Port 3</text>
-    <text class="portname" x="398" y="844">PS5</text>
-    <text class="portmeta" x="398" y="857">Open NAT Open NAT type &#183; VLAN 10#183; 192.168.10.0/24</text></g>
-  <g class="box p-empty"><rect x="570" y="810" width="160" height="64" rx="6"/>
-    <text class="portnum" x="578" y="828" fill="#80868b">Port 4</text>
-    <text class="portname" x="578" y="844">Open</text>
-    <text class="portmeta" x="578" y="857">spare upstairs</text></g>
-  <g class="box p-empty"><rect x="750" y="810" width="160" height="64" rx="6"/>
-    <text class="portnum" x="758" y="828" fill="#80868b">Port 5</text>
-    <text class="portname" x="758" y="844">Open</text>
-    <text class="portmeta" x="758" y="857">spare upstairs</text></g>
+  <g class="box p-uplink"><rect x="30" y="538" width="220" height="46" rx="6"/>
+    <text class="portnum" x="38" y="556" fill="#8a2c22">Port 9 &#8212; combo, SFP+/10G</text>
+    <text class="portname" x="38" y="572">&#8592; Pro XG, port 8</text></g>
+  <text class="note" x="262" y="563">10GbE uplink to the core switch &#8212; one cable carries the uplink AND PoE power</text>
 
   <!-- Legend -->
-  <line x1="30" y1="904" x2="950" y2="904" stroke="#e0e0e0" stroke-width="1"/>
-  <text class="grouptitle" x="30" y="926">Legend</text>
-  <rect x="30"  y="938" width="13" height="13" rx="3" class="p-uplink"/>
-  <text class="portmeta" x="49"  y="949">Uplink / WAN (DAC or fiber)</text>
-  <rect x="220" y="938" width="13" height="13" rx="3" class="p-poe"/>
-  <text class="portmeta" x="239" y="949">PoE-powered link</text>
-  <rect x="380" y="938" width="13" height="13" rx="3" class="p-mgmt"/>
-  <text class="portmeta" x="399" y="949">Management VLAN</text>
-  <rect x="540" y="938" width="13" height="13" rx="3" class="p-trusted"/>
-  <text class="portmeta" x="559" y="949">Trusted VLAN</text>
-  <rect x="680" y="938" width="13" height="13" rx="3" class="p-servers"/>
-  <text class="portmeta" x="699" y="949">Servers VLAN</text>
-  <rect x="820" y="938" width="13" height="13" rx="3" class="p-lab"/>
-  <text class="portmeta" x="839" y="949">Lab VLAN (isolated)</text>
+  <line x1="30" y1="610" x2="950" y2="610" stroke="#e0e0e0" stroke-width="1"/>
+  <text class="grouptitle" x="30" y="632">Legend</text>
+  <rect x="30"  y="644" width="13" height="13" rx="3" class="p-uplink"/>
+  <text class="portmeta" x="49"  y="655">Uplink / WAN</text>
+  <rect x="190" y="644" width="13" height="13" rx="3" class="p-poe"/>
+  <text class="portmeta" x="209" y="655">PoE-powered link</text>
+  <rect x="350" y="644" width="13" height="13" rx="3" class="p-mgmt"/>
+  <text class="portmeta" x="369" y="655">Management VLAN</text>
+  <rect x="510" y="644" width="13" height="13" rx="3" class="p-trusted"/>
+  <text class="portmeta" x="529" y="655">Trusted VLAN</text>
+  <rect x="650" y="644" width="13" height="13" rx="3" class="p-servers"/>
+  <text class="portmeta" x="669" y="655">Servers VLAN</text>
+  <rect x="790" y="644" width="13" height="13" rx="3" class="p-lab"/>
+  <text class="portmeta" x="809" y="655">Lab VLAN (isolated)</text>
+  <rect x="30" y="666" width="13" height="13" rx="3" class="p-planned"/>
+  <text class="portmeta" x="49" y="677">Planned / not built yet</text>
 
   <!-- Setup notes -->
-  <rect x="30" y="966" width="920" height="138" rx="10" fill="#f8f9fa" stroke="#dadce0" stroke-width="1"/>
-  <text class="grouptitle" x="46" y="989">Don&#8217;t forget, in the UniFi controller</text>
-  <text class="note" x="46" y="1009">Devices &#8594; Pro XG &#8594; Ports: Port 2Port 2&#8211;3 &#8220;Servers&#8221;#8211;3 Port 2&#8211;3 &#8220;Servers&#8221;#8220;ServersPort 2&#8211;3 &#8220;Servers&#8221;#8221; (192.168.20.0/24), Port 4 &#8220;Trusted&#8221; (PoE off, ASUS has own brick), Port 6 &#8220;All&#8221;/trunk with PoE ON</text>
-  <text class="note" x="46" y="1026">Devices &#8594; Flex 2.5G &#8594; Ports: Port 1 Port 1 &#8220;Lab&#8221;#8220;LabPort 1 &#8220;Lab&#8221;#8221; (192.168.50.0/24), Port 2 Port 2 &#8220;Trusted&#8221;#8220;TrustedPort 2 &#8220;Trusted&#8221;#8221; (192.168.10.0/24), Ports 3Ports 3&#8211;4 &#8220;Servers&#8221;#8211;4 Ports 3&#8211;4 &#8220;Servers&#8221;#8220;ServersPorts 3&#8211;4 &#8220;Servers&#8221;#8221; (192.168.20.0/24), Port 5 Port 5 &#8220;Management&#8221;#8220;ManagementPort 5 &#8220;Management&#8221;#8221; (192.168.1.0/24), Port 9 (combo) &#8220;All&#8221;/trunk</text>
-  <text class="note" x="46" y="1043">The Pro XG&#8217;s SFP+ port 9 (to the gateway) needs the &#8220;All&#8221;/trunk profile too, so every VLAN can pass through the backbone</text>
-  <text class="note" x="46" y="1060">ASUS is in AP/bridge mode &#8212; no VLAN tagging of its own, so everything behind it (LAN ports, WiFi, the upstairs run) inherits Trusted VLAN from its uplink</text>
-  <text class="note" x="46" y="1077">Upstairs 5-port switch is plain unmanaged &#8212; it just extends Trusted VLAN further; no controller config needed there</text>
+  <rect x="30" y="702" width="920" height="176" rx="10" fill="#f8f9fa" stroke="#dadce0" stroke-width="1"/>
+  <text class="grouptitle" x="46" y="725">What changed with the move</text>
+  <text class="note" x="46" y="746">ISP is now Comcast/Xfinity (was AT&amp;T Fiber) &#8212; cable modem feeds straight into the gateway&#8217;s WAN RJ45 port, no separate ISP router in the chain</text>
+  <text class="note" x="46" y="763">Single-level apartment &#8212; the old downstairs-ASUS / upstairs-switch split is gone. The ASUS router now runs as a plain AP in bridge mode, wired directly to the core switch</text>
+  <text class="note" x="46" y="780">Gateway &#8594; core switch uplink moved from RJ45 10G to SFP+ (both ends), core switch &#8594; access switch uplink is the Flex&#8217;s combo SFP+ port</text>
+  <text class="note" x="46" y="797">Pi 1 and Pi 2 are both confirmed live and correctly VLAN-tagged after the move (verified via the Suricata/DNS troubleshooting session). Pi 3 and Pi 4 are still just plans</text>
+  <text class="note" x="46" y="814">Don&#8217;t forget, in the UniFi controller: Pro XG port 2&#8211;3 &#8220;Servers&#8221; profile, port 4 &#8220;Trusted&#8221; (PoE off, ASUS has its own brick), port 8 &#8220;All&#8221;/trunk with PoE ON, port 9 (SFP+) &#8220;All&#8221;/trunk to the gateway</text>
+  <text class="note" x="46" y="831">Flex 2.5G: port 1 &#8220;Lab&#8221;, port 2 &#8220;Trusted&#8221;, port 5 &#8220;Management&#8221;, port 9 (combo) &#8220;All&#8221;/trunk so every VLAN can pass through the backbone</text>
+  <text class="note" x="46" y="848">Verify no port is still on the old profile from before the move &#8212; a leftover tag was the root cause of the Suricata/DNS incident on Pi 2</text>
+  <text class="note" x="46" y="865">Laptop at the end port of the 10G switch is for management convenience only, not a permanent device placement</text>
 </svg>

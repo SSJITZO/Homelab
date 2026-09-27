@@ -153,32 +153,28 @@
   <g class="box ontop">
     <rect x="432" y="222" width="308" height="54" rx="8"/>
     <text class="t" x="446" y="246">ASUS GT-BE19000AI</text>
-    <text class="s" x="446" y="262">downstairs WiFi AP (AP mode)</text>
+    <text class="s" x="446" y="262">WiFi AP, bridge mode &#8212; wired to core switch</text>
   </g>
 
   <!-- Elsewhere -->
-  <text class="grouptitle" x="432" y="306">Elsewhere in the house</text>
+  <text class="grouptitle" x="432" y="306">Elsewhere in the home</text>
 
   <g class="box elsewhere">
     <rect x="432" y="316" width="308" height="54" rx="8"/>
-    <text class="t" x="446" y="340">UniFi U7 Pro XG &#8212; access point</text>
-    <text class="s" x="446" y="356">WiFi 7 upstairs &#183; fed via room LAN jack</text>
-  </g>
-
-  <g class="box elsewhere">
-    <rect x="432" y="376" width="308" height="54" rx="8"/>
-    <text class="t" x="446" y="400">AT&amp;T BGW320</text>
-    <text class="s" x="446" y="416">ISP gateway &#183; fiber entry &#8594; UCG-Fiber</text>
+    <text class="t" x="446" y="340">Xfinity cable modem</text>
+    <text class="s" x="446" y="356">ISP entry (Comcast) &#8594; UCG-Fiber WAN port</text>
   </g>
 
   <!-- Floor -->
-  <text class="grouptitle" x="432" y="460">On the floor, beside the rack</text>
+  <text class="grouptitle" x="432" y="400">On the floor, beside the rack</text>
 
   <g class="box floor">
-    <rect x="432" y="470" width="308" height="54" rx="8"/>
-    <text class="t" x="446" y="494">CyberPower CP1500PFCLCD &#8212; UPS</text>
-    <text class="s" x="446" y="510">1500VA/1000W &#183; USB&#8594;NAS &#183; feeds rack PDU</text>
+    <rect x="432" y="410" width="308" height="54" rx="8"/>
+    <text class="t" x="446" y="434">CyberPower CP1500PFCLCD &#8212; UPS</text>
+    <text class="s" x="446" y="450">1500VA/1000W &#183; USB&#8594;NAS &#183; feeds rack PDU</text>
   </g>
+
+  <text class="note" x="432" y="484">Single-level home now &#8212; the old &#8220;upstairs U7 Pro XG AP&#8221; is retired; ASUS AP above covers WiFi for the whole space.</text>
 
   <!-- Legend -->
   <line x1="40" y1="638" x2="744" y2="638" stroke="#e0e0e0" stroke-width="1"/>
