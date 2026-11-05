@@ -61,7 +61,7 @@ Full roadmap and certification mapping: [`docs/gap-closure-roadmap.md`](./docs/g
 
 Real problems, diagnosed and resolved — not staged tutorials.
 
-- [**2026-11-05 — Remote access to the Servers VLAN failing: duplicate subnet router + inter-VLAN firewall policy**](./incident-reports/2026-11-05-tailscale-subnet-route-conflict.md) *(in progress)*
+- [**2026-11-05 — Remote access to the Servers VLAN failing: duplicate subnet router + a block rule dropping replies**](./incident-reports/2026-11-05-tailscale-subnet-route-conflict.md)
 - [**2026-09-27 — Suricata false "no detections" after relocation, root cause: self-referential DNS**](./incident-reports/2026-09-27-suricata-dns-after-move.md)
 
 ---
