@@ -42,7 +42,7 @@
     <rect x="530" y="106" width="440" height="108" rx="10" class="keep"/>
     <text class="tag" x="946" y="126" text-anchor="end" fill="#1e5631">KEEP AS-IS</text>
     <text class="pi" x="546" y="130" fill="#1e5631">Pi 1 — Network Guardian</text>
-    <text class="role" x="546" y="150">Same jobs — Pi-hole + WireGuard</text>
+    <text class="role" x="546" y="150">Pi-hole + Tailscale (WireGuard retired)</text>
     <text class="meta" x="546" y="169">NEW ROLE: becomes a log source — its DNS query</text>
     <text class="meta" x="546" y="184">logs feed the SIEM (great for spotting malware</text>
     <text class="meta" x="546" y="199">calling home via DNS). Already done + working.</text>

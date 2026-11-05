@@ -10,14 +10,14 @@ This repo documents the real build: the architecture, the configs, and the actua
 
 **Network core:** UniFi UCG-Fiber gateway → UniFi Pro XG 8 PoE (10G core switch) → UniFi Flex 2.5G PoE (access switch), with six segmented VLANs enforced by zone-based firewall rules.
 
-| VLAN | Purpose | Subnet |
-|---|---|---|
-| Management | UniFi infrastructure control plane | 192.168.1.0/24 |
-| Trusted | Personal devices, gaming PC/console | 192.168.10.0/24 |
-| Servers | NAS, hypervisor host, app Pis | 192.168.20.0/24 |
-| IoT | Reserved — smart home / cameras | 192.168.30.0/24 |
-| Guest | Reserved — visitor WiFi | 192.168.40.0/24 |
-| Lab | Isolated security sandbox | 192.168.50.0/24 |
+| VLAN | Purpose | Subnet | Firewall zone |
+|---|---|---|---|
+| Management | UniFi infrastructure control plane | 192.168.0.0/24 | Internal |
+| Trusted | Personal devices, gaming PC/console | 192.168.10.0/24 | Internal |
+| Servers | NAS, hypervisor host, app Pis | 192.168.20.0/24 | Internal |
+| IoT | Reserved — smart home / cameras | 192.168.30.0/24 | Hotspot |
+| Guest | Reserved — visitor WiFi | 192.168.40.0/24 | Hotspot |
+| Lab | Isolated security sandbox | 192.168.50.0/24 | DMZ |
 
 **Compute:** A Proxmox VE hypervisor host running Jellyfin (media, hardware-transcoded via Intel QuickSync), with a planned SIEM, Windows Server/AD, and an isolated attack range as additional VMs.
 

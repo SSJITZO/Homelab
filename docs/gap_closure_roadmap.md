@@ -110,7 +110,7 @@ This is the execution plan for everything flagged as a gap in the Career Pathway
 1. Create an Azure account (recommended — Always-Free tier never expires) or AWS account
 2. Set a billing alert at $1 immediately, before doing anything else
 3. Spin up the smallest free-tier VM available (Azure B1S, or AWS t2/t3.micro)
-4. Set up a WireGuard site-to-site tunnel between that cloud VM and Pi 1 — now your homelab and the cloud VM can reach each other securely
+4. Join the cloud VM to the tailnet (or build a WireGuard site-to-site tunnel to it, for the hands-on VPN practice) — now your homelab and the cloud VM can reach each other securely
 5. **Optional stretch:** host something trivial on the cloud VM (a status page, a small web app) that's only reachable through that tunnel
 6. Document it as a genuine hybrid-cloud project
 7. **Delete/stop the resource when you're done experimenting** to avoid drift into paid usage
@@ -126,7 +126,7 @@ This is the execution plan for everything flagged as a gap in the Career Pathway
 **High-level steps:**
 1. Sign up for OCI's **Always Free tier** (genuinely permanent, unlike AWS/Azure's time-limited free credits)
 2. Spin up a free-tier compute instance (ARM Ampere A1 instances are generous on the free tier)
-3. Mirror one small homelab service there — e.g., a second WireGuard endpoint, or a simple monitoring page
+3. Mirror one small homelab service there — e.g., join it to the tailnet as a second subnet router, or host a simple monitoring page
 4. Get comfortable navigating the OCI console specifically — compute, VCN (their term for VPC/networking), IAM
 5. Pair this with studying for the **OCI Foundations Associate** exam (free to sit, fast to prepare for)
 
@@ -150,6 +150,49 @@ This is the execution plan for everything flagged as a gap in the Career Pathway
 
 ---
 
+## BUILD 10 — Proxmox Backup Server — closes: Cloud+ (availability / DR), Security+ (resilience)
+
+**What:** A dedicated backup server for every Proxmox VM, storing deduplicated, encrypted backups on the NAS.
+
+**High-level steps:**
+1. Install Proxmox Backup Server on a second mini PC (a Lenovo ThinkCentre M720q is planned), not on the host it protects
+2. Create a datastore on an NFS share on the NAS that only the backup server can reach
+3. Add it to Proxmox as storage, with client-side encryption (keep the key off the lab)
+4. Schedule nightly backups with a 7 daily / 4 weekly / 3 monthly retention, plus weekly verify jobs
+5. Do a test restore every month: restore a VM to a new ID, boot it, delete the copy
+
+**Proves:** Backup and recovery you have actually tested, the control that decides whether a ransomware incident is a bad day or a disaster.
+
+---
+
+## BUILD 11 — Vulnerability scanning (Greenbone / OpenVAS) — closes: CySA+ vulnerability management
+
+**What:** Scheduled scans of your own network, followed by fixing what they find.
+
+**High-level steps:**
+1. Deploy Greenbone Community Edition (official containers) on the second node
+2. Allow only the scanner to reach every VLAN, with a single firewall rule
+3. Run an unauthenticated scan, then an authenticated one with a dedicated SSH key
+4. Rank findings by severity, fix the top ones, rescan, and keep the before/after reports
+
+**Proves:** The full vulnerability-management cycle (scan, prioritize, remediate, verify), a large share of the CySA+ exam.
+
+---
+
+## BUILD 12 — Reverse proxy + internal TLS — closes: Security+ (PKI / TLS), Network+
+
+**What:** Clean HTTPS names (`proxmox.home.arpa`, `nas.home.arpa`) for every web UI, instead of IP addresses and certificate warnings.
+
+**High-level steps:**
+1. Run Nginx Proxy Manager in a small container, with its admin page limited to trusted devices
+2. Add local DNS records in Pi-hole pointing each name at the proxy
+3. Issue certificates (a Let's Encrypt DNS challenge on a domain you own, or your own internal CA)
+4. Never port-forward 80/443: reach it remotely through Tailscale
+
+**Proves:** Practical TLS and certificate handling, and reducing attack surface by putting services behind one hardened entry point.
+
+---
+
 ## Master build order (recommended sequence)
 
 ```
@@ -162,6 +205,9 @@ This is the execution plan for everything flagged as a gap in the Career Pathway
 7. AWS/Azure hybrid project  <- independent, $0 with care
 8. OCI free-tier instance    <- independent, $0, high value given your job
 9. Packet Tracer recreation  <- independent, can be done in parallel with anything above
+10. Proxmox Backup Server    <- do before adding more VMs, so new work is protected
+11. Vulnerability scanning    <- after Build 3, scan the lab and the real network
+12. Reverse proxy + TLS       <- last, once there are several web UIs to put behind it
 ```
 
 Builds 5-9 don't depend on each other or on 1-4 — do them in whatever order keeps you motivated. Builds 1-3 are sequential because each feeds the next.
@@ -181,5 +227,8 @@ Builds 5-9 don't depend on each other or on 1-4 — do them in whatever order ke
 | 7. AWS/Azure hybrid | Not started | Cloud+ |
 | 8. OCI free-tier | Not started | Oracle |
 | 9. Packet Tracer | Not started | Network+, CCNA |
+| 10. Proxmox Backup Server | Not started | Cloud+, Security+ (availability) |
+| 11. Vulnerability scanning (Greenbone) | Not started | CySA+, Security+ |
+| 12. Reverse proxy + internal TLS | Not started | Security+, Network+ |
 
-*(Already complete, not listed above: VLANs/firewall, WireGuard VPN, Pi-hole, Suricata IDS + nftables, Proxmox virtualization, Docker apps, NAS storage.)*
+*(Already complete, not listed above: VLANs and zone firewall, Pi-hole with DNSSEC, Suricata IDS + nftables, Proxmox virtualization, Docker apps, NAS storage, remote access migrated from WireGuard to a Tailscale subnet router, Pi 1 hardening ([write-up](./pi1_hardening.md)), and first-week alert triage ([write-up](./suricata_alert_triage.md)).)*

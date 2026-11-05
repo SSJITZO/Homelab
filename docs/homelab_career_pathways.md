@@ -28,7 +28,7 @@ This maps your homelab build to four realistic career paths, with the certificat
 - ✅ Firewall rule construction and troubleshooting — UniFi zone matrix
 - ✅ NAT and double-NAT diagnosis — solved it live with AT&T BGW320 passthrough and again with the Xfinity XB8-T bridge mode
 - ✅ DHCP, DNS, and static reservations — throughout
-- ✅ Real network troubleshooting under pressure — the 1G bottleneck, VLAN reachability issues, WireGuard handshake debugging
+- ✅ Real network troubleshooting under pressure — the 1G bottleneck, VLAN reachability issues, WireGuard handshake debugging, and a Tailscale subnet-route problem traced to a stateless firewall rule dropping replies ([incident report](../incident-reports/2026-11-05-tailscale-subnet-route-conflict.md))
 - ✅ Cabling/media decisions — Cat6a vs SFP+ DAC, PoE budgets
 - 🔲 **Gap: Cisco IOS CLI syntax.** UniFi's GUI doesn't teach this. **Fix: recreate your topology in Cisco Packet Tracer** (already planned) — this is what actually closes the CCNA/CCNP gap.
 - 🔲 **Gap: dynamic routing protocols** (OSPF, EIGRP). Not present in a single-gateway home network — study this separately, Packet Tracer can simulate it.
@@ -59,7 +59,7 @@ This maps your homelab build to four realistic career paths, with the certificat
 - ✅ Docker containerization (Jellyfin, Jellyseerr, qBittorrent, planned Nextcloud/Immich)
 - 🔲 **Gap: Kubernetes.** Add **k3s** (lightweight Kubernetes) on Pi 3/Pi 4 or as Proxmox VMs — $0 cost, uses hardware you already own.
 - 🔲 **Gap: Infrastructure as Code.** Add **Terraform** managing at least one Proxmox VM via its Proxmox provider — replaces manual GUI clicks with code.
-- 🔲 **Gap: actual public cloud.** No amount of homelab work substitutes for touching a real cloud console. **Fix: free-tier AWS or Azure account**, build one small hybrid project (e.g., WireGuard site-to-site linking your homelab to a cloud VM). This single project closes the "hybrid cloud" objective directly.
+- 🔲 **Gap: actual public cloud.** No amount of homelab work substitutes for touching a real cloud console. **Fix: free-tier AWS or Azure account**, build one small hybrid project (e.g., a cloud VM joined to your tailnet, or a WireGuard site-to-site tunnel, linking your homelab to the cloud). This single project closes the "hybrid cloud" objective directly.
 
 ---
 
@@ -86,7 +86,9 @@ This maps your homelab build to four realistic career paths, with the certificat
 - ✅ **Suricata IDS** — installed, configured, and verified with a real test-alert detection on Pi 2
 - ✅ **nftables firewall** — hands-on packet filtering, verified not to lock yourself out
 - ✅ **VLAN-based network segmentation** — a real defense-in-depth control
-- ✅ **Defense-in-depth, layered firewalls** — UniFi zone rules + per-device host firewalls (ufw, nftables, Proxmox FW, UGOS)
+- ✅ **Defense-in-depth, layered firewalls** — UniFi zone rules + per-device host firewalls (nftables, Proxmox FW, UGOS; ufw staged on Pi 1)
+- ✅ **Host hardening with verified controls** — key-only SSH, fail2ban, automatic security patching and DNSSEC on the DNS server, each proven with a test ([write-up](./pi1_hardening.md))
+- ✅ **Alert triage and tuning** — a week of real IDS and IPS alerts classified as benign or false positive, with a scoped suppression plan ([write-up](./suricata_alert_triage.md))
 - 🔲 **Gap: SIEM experience.** *(Already planned)* Deploy **Wazuh** or **Security Onion** as a Proxmox VM, ship Suricata + Pi-hole + endpoint logs into it. This is the single highest-value addition — nearly every SOC job posting names a SIEM by tool.
 - 🔲 **Gap: Active Directory / identity.** *(Already planned)* Windows Server + AD VM on Proxmox — teaches IAM, the backbone of most enterprise security work.
 - 🔲 **Gap: an actual attack you detected and investigated.** *(Already planned)* Kali + vulnerable target VMs — the attack→detect→triage→document loop is your single strongest portfolio piece across ALL cybersecurity interviews.
@@ -122,7 +124,7 @@ Oracle actively hires internally for Infrastructure Operations roles requiring O
 - ✅ Everything from the Network Engineer and Cloud tracks above — internal Oracle infrastructure roles want exactly this blend
 - ✅ Linux server administration (all four Pis, Proxmox host)
 - ✅ IAM fundamentals *(once the Windows AD VM is built)* — directly maps to the "IAM Analyst" lateral option
-- 🔲 **Gap: OCI-specific hands-on time.** OCI has an **Always Free tier** (similar structure to AWS/Azure) — spin up a free OCI compute instance and mirror one of your homelab services there (e.g., a small web app or a second WireGuard endpoint) to get genuine OCI console experience for $0.
+- 🔲 **Gap: OCI-specific hands-on time.** OCI has an **Always Free tier** (similar structure to AWS/Azure) — spin up a free OCI compute instance and mirror one of your homelab services there (e.g., a small web app, or a node on your tailnet) to get genuine OCI console experience for $0.
 
 ---
 

@@ -23,7 +23,7 @@
 
   <rect x="0" y="0" width="980" height="900" fill="#ffffff"/>
   <text class="title" x="30" y="34">Port map — what plugs into what (new home)</text>
-  <text class="sub"   x="30" y="52">Comcast/Xfinity modem &#8594; UCG-Fiber gateway (&#8220;GOAT&#8221;) &#8594; Pro XG 8 PoE (core) &#8594; Flex 2.5G PoE (access) &#183; single-level layout, no downstairs/upstairs split</text>
+  <text class="sub"   x="30" y="52">AT&amp;T BGW320 (IP Passthrough) &#8594; UCG-Fiber gateway (&#8220;GOAT&#8221;) &#8594; Pro XG 8 PoE (core) &#8594; Flex 2.5G PoE (access)</text>
 
   <!-- ============ UCG-FIBER GATEWAY ============ -->
   <rect x="30" y="76" width="920" height="40" rx="8" fill="#1a73e8"/>
@@ -31,8 +31,8 @@
 
   <g class="box p-uplink"><rect x="30" y="126" width="140" height="56" rx="6"/>
     <text class="portnum" x="38" y="144" fill="#8a2c22">Port 5 (RJ45, PoE+)</text>
-    <text class="portname" x="38" y="160">&#8592; Comcast Cable</text>
-    <text class="portmeta" x="38" y="173">Xfinity modem &#183; WAN in</text></g>
+    <text class="portname" x="38" y="160">&#8592; AT&amp;T Fiber</text>
+    <text class="portmeta" x="38" y="173">BGW320 &#183; WAN in</text></g>
   <g class="box p-empty"><rect x="180" y="126" width="140" height="56" rx="6"/>
     <text class="portnum" x="188" y="144" fill="#80868b">Ports 1&#8211;3</text>
     <text class="portname" x="188" y="160">Open</text>
@@ -110,7 +110,7 @@
   <g class="box p-trusted"><rect x="142" y="466" width="106" height="64" rx="6"/>
     <text class="portnum" x="150" y="484" fill="#174ea6">Port 2</text>
     <text class="portname" x="150" y="499">Pi 1 (pi1-guardian)</text>
-    <text class="portmeta" x="150" y="512">VLAN 10 &#183; Trusted &#183; Pi-hole+VPN &#8212; LIVE</text></g>
+    <text class="portmeta" x="150" y="512">VLAN 10 &#183; Trusted &#183; Pi-hole+Tailscale &#8212; LIVE</text></g>
   <g class="box p-planned"><rect x="254" y="466" width="106" height="64" rx="6"/>
     <text class="portnum" x="262" y="484" fill="#5f6368">Port 3</text>
     <text class="portname" x="262" y="499">Pi 3 &#8212; not built</text>
@@ -162,8 +162,8 @@
   <!-- Setup notes -->
   <rect x="30" y="702" width="920" height="176" rx="10" fill="#f8f9fa" stroke="#dadce0" stroke-width="1"/>
   <text class="grouptitle" x="46" y="725">What changed with the move</text>
-  <text class="note" x="46" y="746">ISP is now Comcast/Xfinity (was AT&amp;T Fiber) &#8212; cable modem feeds straight into the gateway&#8217;s WAN RJ45 port, no separate ISP router in the chain</text>
-  <text class="note" x="46" y="763">Single-level apartment &#8212; the old downstairs-ASUS / upstairs-switch split is gone. The ASUS router now runs as a plain AP in bridge mode, wired directly to the core switch</text>
+  <text class="note" x="46" y="746">ISP is AT&amp;T Fiber again &#8212; the BGW320 can&#8217;t be bypassed (802.1X certificate auth), so it runs in IP Passthrough and hands the public IP to the UCG-Fiber</text>
+  <text class="note" x="46" y="763">Back in a two-floor home. The ASUS router runs as an AP wired to the core switch; remote access is a Tailscale subnet router on Pi 1, with no port forwards</text>
   <text class="note" x="46" y="780">Gateway &#8594; core switch uplink moved from RJ45 10G to SFP+ (both ends), core switch &#8594; access switch uplink is the Flex&#8217;s combo SFP+ port</text>
   <text class="note" x="46" y="797">Pi 1 and Pi 2 are both confirmed live and correctly VLAN-tagged after the move (verified via the Suricata/DNS troubleshooting session). Pi 3 and Pi 4 are still just plans</text>
   <text class="note" x="46" y="814">Don&#8217;t forget, in the UniFi controller: Pro XG port 2&#8211;3 &#8220;Servers&#8221; profile, port 4 &#8220;Trusted&#8221; (PoE off, ASUS has its own brick), port 8 &#8220;All&#8221;/trunk with PoE ON, port 9 (SFP+) &#8220;All&#8221;/trunk to the gateway</text>

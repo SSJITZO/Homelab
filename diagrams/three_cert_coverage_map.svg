@@ -44,7 +44,7 @@
   <!-- ROW 2: Firewall/VPN/NAT -->
   <g class="card done"><rect x="30" y="190" width="230" height="66" rx="8"/>
     <text class="itemtitle" x="42" y="210" fill="#1e5631">Firewall + VPN + NAT</text>
-    <text class="itemmeta" x="42" y="226">UniFi zone firewall, WireGuard,</text>
+    <text class="itemmeta" x="42" y="226">UniFi zone firewall, Tailscale, WireGuard,</text>
     <text class="itemmeta" x="42" y="240">bridge/passthrough troubleshooting</text>
   </g>
   <g><rect x="750" y="190" width="260" height="66" rx="8" fill="#f8f9fa" stroke="#dadce0"/>
