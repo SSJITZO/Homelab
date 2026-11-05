@@ -27,12 +27,12 @@ This repo documents the real build: the architecture, the configs, and the actua
 
 | Device | Role | Status |
 |---|---|---|
-| Pi 1 | Network-wide DNS filtering (Pi-hole) + Tailscale subnet router (WireGuard being retired) | ✅ Live |
+| Pi 1 | Network-wide DNS filtering (Pi-hole, DNSSEC) + Tailscale subnet router, hardened ([details](./docs/pi1_hardening.md)) | ✅ Live |
 | Pi 2 | Intrusion detection sensor (Suricata, 52,985 active signatures) + host firewall (nftables) | ✅ Live |
 | Pi 3 | Self-hosted apps (Vaultwarden, Nextcloud) | 🔲 Planned |
 | Pi 4 | Observability (Grafana + Prometheus + Uptime Kuma) | 🔲 Planned |
 
-**Remote access:** Tailscale (WireGuard-based mesh VPN). Pi 1 is the single subnet router for the Trusted and Servers VLANs; Proxmox and Pi 2 also run Tailscale directly. Access is governed by tailnet access rules (grants) and per-server key-expiry settings, with device approval next on the list. Once the cutover is verified, the old WireGuard server and its UDP port forward are removed, leaving **no inbound ports open** on the WAN.
+**Remote access:** Tailscale (WireGuard-based mesh VPN). Pi 1 is the single subnet router for the Trusted and Servers VLANs; Proxmox and Pi 2 also run Tailscale directly. Access is governed by tailnet access rules (grants) and per-server key-expiry settings, with device approval next on the list. The old WireGuard server (PiVPN) has been retired, and closing its UDP port forward leaves **no inbound ports open** on the WAN.
 
 ---
 
@@ -43,6 +43,7 @@ This repo documents the real build: the architecture, the configs, and the actua
 - Self-hosted media platform (Jellyfin) with request management (Jellyseerr)
 - Hypervisor-backed virtualization with NAS-integrated shared storage
 - Remote access via a Tailscale subnet router, replacing the original WireGuard server (double-NAT behind the ISP gateway diagnosed and resolved during the move)
+- A hardened DNS and remote-access host: key-only SSH, fail2ban, automatic security patching, DNSSEC and a staged default-deny firewall, each verified with a test ([`docs/pi1_hardening.md`](./docs/pi1_hardening.md))
 - Real-time alert pipeline: Suricata and UniFi IPS alerts pushed to a phone via ntfy, with benign signatures triaged in [`docs/suricata_alert_triage.md`](./docs/suricata_alert_triage.md)
 
 ## In progress / roadmap
@@ -74,6 +75,6 @@ Full network, rack, and career-mapping diagrams live in [`diagrams/`](./diagrams
 
 ## Technologies
 
-`Proxmox VE` `UniFi Network` `VLANs & Zone Firewalls` `Tailscale` `WireGuard` `Suricata IDS` `ntfy` `nftables` `Pi-hole` `Docker` `Jellyfin` `SMB/CIFS` `Raspberry Pi OS` `Linux Administration`
+`Proxmox VE` `UniFi Network` `VLANs & Zone Firewalls` `Tailscale` `WireGuard` `Suricata IDS` `ntfy` `fail2ban` `ufw` `DNSSEC` `nftables` `Pi-hole` `Docker` `Jellyfin` `SMB/CIFS` `Raspberry Pi OS` `Linux Administration`
 
 *(Planned: Wazuh, Windows Server/AD, Kali, Kubernetes, Terraform, Azure/AWS)*
