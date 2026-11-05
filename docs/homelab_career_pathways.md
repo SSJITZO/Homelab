@@ -1,7 +1,7 @@
 # Homelab Career Pathway Map
 ### How one project supports four different career tracks
 
-This maps your homelab build to four realistic career paths, with the certifications each one actually requires, in the order the market expects them. Every homelab piece listed under a track is something you've built or planned that directly demonstrates that skill.
+This maps your homelab build to four realistic career paths, with the certifications each one actually requires, in the order the market expects them. Every homelab piece listed under a track is something you've built or planned that directly demonstrates that skill. ✅ = built and verified, 🔲 = planned. Planned items come from the current hardening plan and a set of 15 job-role labs (mapped in full near the end).
 
 ---
 
@@ -32,6 +32,11 @@ This maps your homelab build to four realistic career paths, with the certificat
 - ✅ Cabling/media decisions — Cat6a vs SFP+ DAC, PoE budgets
 - 🔲 **Gap: Cisco IOS CLI syntax.** UniFi's GUI doesn't teach this. **Fix: recreate your topology in Cisco Packet Tracer** (already planned) — this is what actually closes the CCNA/CCNP gap.
 - 🔲 **Gap: dynamic routing protocols** (OSPF, EIGRP). Not present in a single-gateway home network — study this separately, Packet Tracer can simulate it.
+- 🔲 **Least-privilege segmentation.** Replace the broad Trusted → Servers allow with per-device rules (subnet router and admin devices only), move Management into its own zone, and send unused switch ports to a blackhole VLAN.
+- 🔲 **Edge hardening.** UPnP off, IPS set to block, WPA3 plus separate IoT and Guest SSIDs with client isolation, firmware and config backups on a schedule.
+- 🔲 **DNS redundancy and internal names.** A second Pi-hole as backup DNS, plus a reverse proxy with `home.arpa` names and internal TLS for every web UI.
+- 🔲 **Lab 06 — Security Architect:** zero-trust segmentation and a STRIDE threat model, compared against the real VLAN and zone design.
+- 🔲 **Lab 07 — Network Security Engineer:** custom Suricata rules validated with `suricata -T`, loaded on the real sensor, and triaged from `eve.json`.
 
 ---
 
@@ -59,6 +64,11 @@ This maps your homelab build to four realistic career paths, with the certificat
 - ✅ Docker containerization (Jellyfin, Jellyseerr, qBittorrent, planned Nextcloud/Immich)
 - 🔲 **Gap: Kubernetes.** Add **k3s** (lightweight Kubernetes) on Pi 3/Pi 4 or as Proxmox VMs — $0 cost, uses hardware you already own.
 - 🔲 **Gap: Infrastructure as Code.** Add **Terraform** managing at least one Proxmox VM via its Proxmox provider — replaces manual GUI clicks with code.
+- 🔲 **Backup and recovery.** Proxmox Backup Server on a second node, encrypted nightly backups to the NAS, weekly verify jobs and monthly test restores, plus an offsite copy (3-2-1).
+- 🔲 **A second Proxmox node.** A Lenovo M720q (i7-8700T, 32 GB) to host the backup server and scanner, and to practise clustering.
+- 🔲 **Lab 02 — Cloud Security Engineer:** scanning insecure vs. secure Terraform with Checkov, tracing each finding to its fix, with a stretch goal of porting one resource to OCI.
+- 🔲 **Lab 03 — DevSecOps Engineer:** SAST (Bandit) and dependency scanning (pip-audit) on a deliberately vulnerable app, a hardened non-root container, and a CI pipeline running the same checks.
+- 🔲 **A local AI node.** A GMKtec EVO-X2 (Ryzen AI Max+ 395, 64 GB) running models on-prem for automation workflows, joined to the lab like any other server.
 - 🔲 **Gap: actual public cloud.** No amount of homelab work substitutes for touching a real cloud console. **Fix: free-tier AWS or Azure account**, build one small hybrid project (e.g., a cloud VM joined to your tailnet, or a WireGuard site-to-site tunnel, linking your homelab to the cloud). This single project closes the "hybrid cloud" objective directly.
 
 ---
@@ -80,6 +90,7 @@ This maps your homelab build to four realistic career paths, with the certificat
    - **Blue team / detection track:** stay on CySA+, add **GCIA** (network intrusion analysis) if network-heavy environments interest you
    - **Red team / offensive track:** **PenTest+** or **CEH**, then **OSCP** for serious hands-on credibility
 4. **Cloud security cert** — **AWS Security Specialty** or **Azure AZ-500** — cloud security is now table-stakes for mid-level roles
+   - *(Emerging specialty)* **CompTIA SecAI+ (CY0-001)** — AI security, launched February 2026; recommended after Security+ or CySA+. Domains: basic AI concepts (17%), securing AI systems (40%), AI-assisted security (24%), and AI governance, risk and compliance (19%).
 5. *(Senior/management track)* **CISSP** (5 years experience required) or **CISM** for leadership; **CCSP** if specializing in cloud security specifically
 
 ### What your homelab already proves for this track
@@ -93,6 +104,23 @@ This maps your homelab build to four realistic career paths, with the certificat
 - 🔲 **Gap: Active Directory / identity.** *(Already planned)* Windows Server + AD VM on Proxmox — teaches IAM, the backbone of most enterprise security work.
 - 🔲 **Gap: an actual attack you detected and investigated.** *(Already planned)* Kali + vulnerable target VMs — the attack→detect→triage→document loop is your single strongest portfolio piece across ALL cybersecurity interviews.
 - 🔲 **Gap: MITRE ATT&CK mapping.** When Suricata/SIEM catches something, document *which ATT&CK technique* it represents — this is a specific, checkable skill recruiters look for.
+- 🔲 **Vulnerability management.** Greenbone/OpenVAS scans of every VLAN (unauthenticated, then authenticated), findings ranked by severity, fixed and rescanned, with before/after reports.
+- 🔲 **Finish hardening every host.** Enable the staged ufw policy on Pi 1; give the IDS sensor the same baseline (key-only SSH, fail2ban, patching, DNS pinning) and apply its scoped Suricata suppressions; Proxmox 2FA, key-only SSH and its firewall; NAS admin lockdown, SMB2/3 only and immutable snapshots.
+- 🔲 **Identity hardening.** Phishing-resistant MFA with two hardware security keys on GitHub, the Tailscale identity provider, UniFi and Proxmox; Tailscale device approval, least-privilege access rules and Tailnet Lock.
+- 🔲 **Deception.** An internal honeypot (OpenCanary) on its own Pi: nothing legitimate ever connects to it, so any connection is an early warning of scanning or lateral movement.
+- 🔲 **Job-role labs for this track:**
+  - **Lab 01 — Security Engineer:** SSH brute-force and password-spraying detection, then hardening that is checked against the live Pi baseline.
+  - **Lab 04 — Threat Hunter:** Sigma 2.0 detection rules and a hunt across sample telemetry, each finding mapped to MITRE ATT&CK, then one detection rebuilt in Wazuh.
+  - **Lab 05 — Incident Responder:** a NIST SP 800-61 playbook walked as a tabletop, a merged attack timeline, and a written postmortem.
+  - **Lab 08 — IAM Engineer:** an access review that flags missing MFA, conflicting roles and excess privilege, repeated for real on every homelab account.
+  - **Lab 09 — Security Manager:** a scored risk register and a remediation roadmap, rebuilt with the homelab's real risks.
+  - **Lab 10 — GRC Analyst:** a NIST CSF 2.0 assessment across Govern, Identify, Protect, Detect, Respond and Recover, with a gap analysis.
+- 🔲 **AI security labs (SecAI+):**
+  - **Lab 11 — AI basics and data security:** local models, an AI asset inventory, and secret scanning before any data reaches a model.
+  - **Lab 12 — AI-assisted alert triage:** a local model labelling real Suricata alerts, scored against known-benign traffic, with a human always checking the output.
+  - **Lab 13 — Securing an AI app:** a small chatbot threat-modelled against the OWASP Top 10 for LLM Applications and MITRE ATLAS, scanned with garak, hardened (output filtering, rate limits, least privilege) and monitored by a Wazuh rule that fires if protected data leaks.
+  - **Lab 14 — AI governance:** an AI acceptable-use policy, AI risks added to the risk register, a NIST AI RMF mapping and a model card.
+  - **Lab 15 — AI security tools:** AI code review compared with Bandit on a known-vulnerable app, written up as a buyer's comparison.
 
 ---
 
@@ -124,6 +152,8 @@ Oracle actively hires internally for Infrastructure Operations roles requiring O
 - ✅ Everything from the Network Engineer and Cloud tracks above — internal Oracle infrastructure roles want exactly this blend
 - ✅ Linux server administration (all four Pis, Proxmox host)
 - ✅ IAM fundamentals *(once the Windows AD VM is built)* — directly maps to the "IAM Analyst" lateral option
+- 🔲 **Lab 08 (IAM access review)** — the day-to-day work of an IAM Analyst: who has access, whether they still need it, and whether MFA is on
+- 🔲 **Lab 02's OCI stretch goal** — the same misconfiguration scanning applied to an OCI resource, a direct bridge to OCI Architect Associate
 - 🔲 **Gap: OCI-specific hands-on time.** OCI has an **Always Free tier** (similar structure to AWS/Azure) — spin up a free OCI compute instance and mirror one of your homelab services there (e.g., a small web app, or a node on your tailnet) to get genuine OCI console experience for $0.
 
 ---
@@ -145,15 +175,47 @@ Some certifications count toward multiple tracks simultaneously. Prioritize thes
 
 ---
 
+## Job-role labs at a glance
+
+Fifteen hands-on labs, each built around one real job. Labs 01–10 follow a single SSH-compromise story end to end; labs 11–15 cover AI security for SecAI+. All are planned; each will get a short write-up as it is completed.
+
+| Lab | Job it practices | Track(s) | Certs it supports |
+|---|---|---|---|
+| 01 SSH detection and hardening | Security Engineer | Security | Security+, CySA+ |
+| 02 Terraform misconfiguration scan | Cloud Security Engineer | Cloud, Oracle | Cloud+, Terraform Associate, OCI |
+| 03 DevSecOps pipeline | DevSecOps Engineer | Cloud, Security | Cloud+, Security+ |
+| 04 Threat hunting | Threat Hunter | Security | CySA+ |
+| 05 Incident response | Incident Responder | Security | CySA+, Security+ |
+| 06 Security architecture | Security Architect | Network, Security | Security+, Network+ |
+| 07 Network security | Network Security Engineer | Network, Security | Network+, CySA+ |
+| 08 IAM access review | IAM Engineer | Security, Oracle | Security+ |
+| 09 Risk register and roadmap | Security Manager | Security | Security+, CISSP (later) |
+| 10 NIST CSF assessment | GRC Analyst | Security | Security+, CISSP (later) |
+| 11 AI basics and data security | AI Security | Security | SecAI+ |
+| 12 AI-assisted alert triage | SOC Analyst | Security | SecAI+, CySA+ |
+| 13 Securing an AI app | AI Security Engineer | Security | SecAI+ |
+| 14 AI governance, risk and compliance | GRC Analyst | Security | SecAI+ |
+| 15 AI security tools compared | Security Manager | Security | SecAI+ |
+
+---
+
 ## Suggested homelab build order to close every remaining gap
 
-1. **SIEM** (Wazuh or Security Onion) on Proxmox — closes the biggest Security+ / CySA+ gap
-2. **Windows Server + Active Directory VM** — closes Security+ IAM gap AND supports the Oracle IAM Analyst lateral path
-3. **Kali + vulnerable target VMs** — the attack→detect→document portfolio centerpiece
-4. **k3s (Kubernetes)** on existing Pi hardware — closes the Cloud+ containerization gap, $0 cost
-5. **Terraform** managing a Proxmox VM — closes the Cloud+ IaC gap, $0 cost
-6. **One AWS/Azure free-tier hybrid project** — closes the Cloud+ public-cloud gap
-7. **One OCI free-tier instance** — Oracle-specific, high leverage given your current employer
-8. **Cisco Packet Tracer recreation** of your topology — closes the Network Engineer CLI/CCNA gap
+1. **Finish hardening** — Pi 1 firewall, the IDS sensor, Proxmox, NAS, UniFi and Tailscale least privilege
+2. **Proxmox Backup Server** on a second node — protects everything built after it
+3. **SIEM** (Wazuh) on Proxmox — closes the biggest Security+ / CySA+ gap
+4. **Windows Server + Active Directory VM** — closes the Security+ IAM gap AND supports the Oracle IAM Analyst lateral path
+5. **Kali + vulnerable target VMs** — the attack→detect→document portfolio centerpiece
+6. **Vulnerability scanning** (Greenbone) — scan, fix, rescan, report
+7. **Reverse proxy + internal TLS** — clean names and HTTPS for every web UI
+8. **Backup DNS and an internal honeypot** — resilience and early warning
+9. **k3s (Kubernetes)** — closes the Cloud+ containerization gap, $0 cost
+10. **Terraform** managing a Proxmox VM — closes the Cloud+ IaC gap, $0 cost
+11. **One AWS/Azure free-tier hybrid project** — closes the Cloud+ public-cloud gap
+12. **One OCI free-tier instance** — Oracle-specific, high leverage given your current employer
+13. **Cisco Packet Tracer recreation** of your topology — closes the Network Engineer CLI/CCNA gap
+14. **Local AI node** — hosts the AI security labs and day-to-day automation
 
-Every one of these is free or near-free, and every one builds on hardware or software you already have running.
+The job-role labs run alongside the builds: labs 01, 03 and 06 need only a lab VM, lab 07 uses the existing sensor, lab 04 finishes once the SIEM is up, and labs 11–15 run on a local model.
+
+Most of these are free or near-free and build on hardware or software already running; the second Proxmox node and the AI node are the planned hardware purchases.
