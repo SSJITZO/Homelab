@@ -50,6 +50,6 @@ After replacing the WireGuard server with Tailscale, the NAS could not be reache
 ## Follow-up
 
 - [x] Fix the block rule's connection state and re-test from Pi 1.
-- [ ] Re-test from a phone on cellular with Tailscale.
+- [x] Re-test from outside the network: the NAS web page opened from a laptop at a different location, over Tailscale through Pi 1.
 - [ ] Remove the WireGuard server and its UDP port forward once remote access is verified.
 - [ ] Replace the broad "Trusted to Servers – Allow" with least-privilege rules (Pi 1 and admin devices only), and remove the now-redundant "Pi 1 to NAS" rule.
