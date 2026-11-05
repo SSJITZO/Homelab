@@ -136,7 +136,7 @@ This is the execution plan for everything flagged as a gap in the Career Pathway
 
 ## BUILD 9 — Cisco Packet Tracer recreation — closes: Network Engineer CLI/CCNA gap
 
-**What:** Your existing network topology, rebuilt in Cisco IOS syntax. *(Already scoped in an earlier session — device list and IP scheme are ready.)*
+**What:** Your existing network topology, rebuilt in Cisco IOS syntax. *(The device list and IP scheme are already mapped.)*
 
 **High-level steps:**
 1. Install Packet Tracer (free via Cisco Networking Academy signup)

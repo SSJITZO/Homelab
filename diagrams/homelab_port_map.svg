@@ -165,7 +165,7 @@
   <text class="note" x="46" y="746">ISP is AT&amp;T Fiber again &#8212; the BGW320 can&#8217;t be bypassed (802.1X certificate auth), so it runs in IP Passthrough and hands the public IP to the UCG-Fiber</text>
   <text class="note" x="46" y="763">Back in a two-floor home. The ASUS router runs as an AP wired to the core switch; remote access is a Tailscale subnet router on Pi 1, with no port forwards</text>
   <text class="note" x="46" y="780">Gateway &#8594; core switch uplink moved from RJ45 10G to SFP+ (both ends), core switch &#8594; access switch uplink is the Flex&#8217;s combo SFP+ port</text>
-  <text class="note" x="46" y="797">Pi 1 and Pi 2 are both confirmed live and correctly VLAN-tagged after the move (verified via the Suricata/DNS troubleshooting session). Pi 3 and Pi 4 are still just plans</text>
+  <text class="note" x="46" y="797">Pi 1 and Pi 2 are both confirmed live and correctly VLAN-tagged after the move (verified during the Suricata/DNS incident). Pi 3 and Pi 4 are still just plans</text>
   <text class="note" x="46" y="814">Don&#8217;t forget, in the UniFi controller: Pro XG port 2&#8211;3 &#8220;Servers&#8221; profile, port 4 &#8220;Trusted&#8221; (PoE off, ASUS has its own brick), port 8 &#8220;All&#8221;/trunk with PoE ON, port 9 (SFP+) &#8220;All&#8221;/trunk to the gateway</text>
   <text class="note" x="46" y="831">Flex 2.5G: port 1 &#8220;Lab&#8221;, port 2 &#8220;Trusted&#8221;, port 5 &#8220;Management&#8221;, port 9 (combo) &#8220;All&#8221;/trunk so every VLAN can pass through the backbone</text>
   <text class="note" x="46" y="848">Verify no port is still on the old profile from before the move &#8212; a leftover tag was the root cause of the Suricata/DNS incident on Pi 2</text>
