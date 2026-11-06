@@ -109,12 +109,12 @@
   <g class="box servers">
     <rect x="326" y="308" width="150" height="46" rx="6"/>
     <text class="name" x="336" y="327">UGREEN NAS</text>
-    <text class="meta" x="336" y="341">firewall: UGOS (deny-all)</text>
+    <text class="meta" x="336" y="341">UGOS deny-all &#183; runs Jellyfin</text>
   </g>
   <g class="box servers">
     <rect x="326" y="362" width="150" height="46" rx="6"/>
     <text class="name" x="336" y="381">Proxmox (Mini PC)</text>
-    <text class="meta" x="336" y="395">Proxmox FW &#183; runs Jellyfin</text>
+    <text class="meta" x="336" y="395">Proxmox FW &#183; lab VMs</text>
   </g>
   <g class="box servers" stroke-dasharray="4 3">
     <rect x="326" y="416" width="150" height="46" rx="6"/>

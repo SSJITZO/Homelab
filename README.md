@@ -19,9 +19,9 @@ This repo documents the real build: the architecture, the configs, and the actua
 | Guest | Reserved — visitor WiFi | 192.168.40.0/24 | Hotspot |
 | Lab | Isolated security sandbox | 192.168.50.0/24 | DMZ |
 
-**Compute:** A Proxmox VE hypervisor host running Jellyfin (media, hardware-transcoded via Intel QuickSync), with a planned SIEM, Windows Server/AD, and an isolated attack range as additional VMs.
+**Compute:** A Proxmox VE hypervisor host (KAMRUI Hyper H2 mini PC) dedicated to the lab: a planned SIEM, Windows Server/AD, and an isolated attack range as VMs. Media runs separately on the NAS, so lab work never interrupts it.
 
-**Storage:** A 4-bay NAS (UGREEN DXP4800 Plus) running Btrfs-on-RAID5, mounted into Proxmox over SMB/CIFS.
+**Storage:** A 4-bay NAS (UGREEN DXP4800 Plus) running Btrfs-on-RAID5. It also hosts the media stack (Jellyfin, Jellyseerr) in Docker next to the files it serves, and is mounted into Proxmox over SMB/CIFS.
 
 **Edge fleet:** Four Raspberry Pi 5 units, each with a single hardened responsibility:
 
@@ -40,7 +40,7 @@ This repo documents the real build: the architecture, the configs, and the actua
 
 - Multi-VLAN network with a documented, enforced firewall policy (zone-based, least-privilege)
 - A verified, alert-generating IDS sensor — see [`incident-reports/`](./incident-reports) for a real detection walkthrough
-- Self-hosted media platform (Jellyfin) with request management (Jellyseerr)
+- Self-hosted media platform (Jellyfin) with request management (Jellyseerr), running in Docker on the NAS
 - Hypervisor-backed virtualization with NAS-integrated shared storage
 - Remote access via a Tailscale subnet router, replacing the original WireGuard server (double-NAT behind the ISP gateway diagnosed and resolved during the move)
 - A hardened DNS and remote-access host: key-only SSH, fail2ban, automatic security patching, DNSSEC and a staged default-deny firewall, each verified with a test ([`docs/pi1_hardening.md`](./docs/pi1_hardening.md))
