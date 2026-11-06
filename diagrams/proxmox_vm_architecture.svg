@@ -110,8 +110,8 @@
 
   <g class="card todo"><rect x="30" y="620" width="330" height="110" rx="8"/>
     <text class="vmtitle" x="42" y="642" fill="#7a5900">Azure or AWS free-tier VM</text>
-    <text class="vmmeta" x="42" y="658">B1S / t3.micro, WireGuard site-to-site</text>
-    <text class="vmmeta" x="42" y="672">tunnels back to Pi 1</text>
+    <text class="vmmeta" x="42" y="658">B1S / t3.micro, Tailscale (or WireGuard)</text>
+    <text class="vmmeta" x="42" y="672">linked back to the homelab</text>
     <rect x="42" y="682" width="60" height="15" rx="7" fill="#f4a000"/><text class="tag" x="72" y="693" text-anchor="middle">TODO</text>
     <text class="vmmeta" x="42" y="714">&#127942; Cloud+ (public/hybrid cloud domain)</text>
   </g>
@@ -139,7 +139,7 @@
   <text class="note" x="46" y="818">into the SIEM VM once Build 1 exists — see the separate SIEM &amp; Log Flow diagram for that data path in detail.</text>
   <text class="note" x="46" y="840">Sizing note: with SIEM + AD + Kali + target all running, budget roughly 16-20GB RAM allocated across guests —</text>
   <text class="note" x="46" y="856">comfortable headroom on the Kamrui's 32GB, with plenty left over for k3s nodes. Stop/suspend VMs you're not using to stay responsive.</text>
-  <text class="note" x="46" y="878">Nothing on this host is internet-facing — remote access to anything here goes through the WireGuard tunnel on Pi 1, never a forwarded port.</text>
+  <text class="note" x="46" y="878">Nothing on this host is internet-facing — remote access to anything here goes through the Tailscale subnet router on Pi 1, never a forwarded port.</text>
 
   <rect x="30" y="898" width="14" height="14" rx="3" class="done"/>
   <text class="vmmeta" x="50" y="909">Running today</text>

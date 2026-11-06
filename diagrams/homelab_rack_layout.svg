@@ -67,7 +67,7 @@
   <g class="box compute">
     <rect x="52" y="217" width="320" height="83" rx="6"/>
     <text class="t" x="64" y="250">Raspberry Pi 5 &#215;4  (GeeekPi 2U mount)</text>
-    <text class="s" x="64" y="267">VLAN lab &#183; Pi-hole+VPN &#183; apps &#183; monitoring</text>
+    <text class="s" x="64" y="267">VLAN lab &#183; Pi-hole+Tailscale &#183; IDS &#183; apps</text>
     <text class="s" x="64" y="283">each with active cooler + NVMe SSD</text>
     <text class="u" x="360" y="260" text-anchor="end">2U</text>
   </g>
@@ -161,8 +161,8 @@
 
   <g class="box elsewhere">
     <rect x="432" y="316" width="308" height="54" rx="8"/>
-    <text class="t" x="446" y="340">Xfinity cable modem</text>
-    <text class="s" x="446" y="356">ISP entry (Comcast) &#8594; UCG-Fiber WAN port</text>
+    <text class="t" x="446" y="340">AT&amp;T BGW320 gateway</text>
+    <text class="s" x="446" y="356">AT&amp;T Fiber &#8594; IP Passthrough &#8594; UCG-Fiber</text>
   </g>
 
   <!-- Floor -->
@@ -174,7 +174,7 @@
     <text class="s" x="446" y="450">1500VA/1000W &#183; USB&#8594;NAS &#183; feeds rack PDU</text>
   </g>
 
-  <text class="note" x="432" y="484">Single-level home now &#8212; the old &#8220;upstairs U7 Pro XG AP&#8221; is retired; ASUS AP above covers WiFi for the whole space.</text>
+  <text class="note" x="432" y="484">Now in a two-floor home on AT&amp;T Fiber.</text>
 
   <!-- Legend -->
   <line x1="40" y1="638" x2="744" y2="638" stroke="#e0e0e0" stroke-width="1"/>

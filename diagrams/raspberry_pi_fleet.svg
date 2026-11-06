@@ -23,14 +23,14 @@
 
     <text class="seclabel" x="46" y="134" fill="#174ea6">Software</text>
     <text class="line" x="46" y="150">Pi-hole (DNS / ad-block)</text>
-    <text class="line" x="46" y="165">WireGuard via PiVPN (remote VPN)</text>
+    <text class="line" x="46" y="165">Tailscale subnet router (remote access)</text>
 
     <text class="seclabel" x="46" y="189" fill="#174ea6">SOC role</text>
     <text class="line" x="46" y="205">Log source &#8594; SIEM (DNS query logs)</text>
     <text class="line" x="46" y="220">catches malware calling home via DNS</text>
 
     <text class="seclabel" x="46" y="244" fill="#174ea6">Network</text>
-    <text class="line" x="46" y="260">VLAN 10 &#183; Trusted &#183; firewall: ufw</text>
+    <text class="line" x="46" y="260">VLAN 10 &#183; Trusted &#183; fail2ban, ufw staged</text>
     <text class="line" x="46" y="275">DNS (53) open to all VLANs</text>
 
     <text class="seclabel" x="46" y="299" fill="#174ea6">Status / location</text>

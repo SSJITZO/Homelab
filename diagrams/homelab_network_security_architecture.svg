@@ -21,16 +21,16 @@
   <rect x="0" y="0" width="960" height="800" fill="#ffffff"/>
 
   <text class="title" x="30" y="34">Homelab network &amp; security architecture</text>
-  <text class="sub"   x="30" y="52">VLAN segmentation, gateway enforcement, and per-device firewall layers &#8212; current home (single level)</text>
+  <text class="sub"   x="30" y="52">VLAN segmentation, gateway enforcement, and per-device firewall layers &#8212; current home (two floors, AT&amp;T Fiber)</text>
 
   <!-- Internet -->
   <rect x="400" y="68" width="160" height="34" rx="8" fill="#f1f3f4" stroke="#9aa0a6" stroke-width="1.5"/>
-  <text class="name" x="480" y="89" text-anchor="middle">Internet (Comcast/Xfinity)</text>
+  <text class="name" x="480" y="89" text-anchor="middle">Internet (AT&amp;T Fiber)</text>
   <line class="line" x1="480" y1="102" x2="480" y2="120"/>
 
-  <!-- Xfinity modem -->
+  <!-- ISP gateway -->
   <rect x="400" y="120" width="160" height="34" rx="8" fill="#f1f3f4" stroke="#9aa0a6" stroke-width="1.5"/>
-  <text class="name" x="480" y="141" text-anchor="middle">Xfinity cable modem</text>
+  <text class="name" x="480" y="141" text-anchor="middle">AT&amp;T BGW320 (passthrough)</text>
   <line class="line" x1="480" y1="154" x2="480" y2="172"/>
 
   <!-- UCG-Fiber gateway -->
@@ -50,18 +50,24 @@
   <line class="line" x1="875" y1="254" x2="875" y2="270"/>
 
   <!-- Column headers -->
-  <rect x="10" y="270" width="150" height="28" rx="6" fill="#9aa0a6"/>
-  <text class="colhead" x="85" y="289" text-anchor="middle" fill="#ffffff">VLAN 1 &#183; Management &#183; 192.168.1.0/24</text>
-  <rect x="168" y="270" width="150" height="28" rx="6" fill="#4285f4"/>
-  <text class="colhead" x="243" y="289" text-anchor="middle" fill="#ffffff">VLAN 10 &#183; Trusted &#183; 192.168.10.0/24</text>
-  <rect x="326" y="270" width="150" height="28" rx="6" fill="#12a594"/>
-  <text class="colhead" x="401" y="289" text-anchor="middle" fill="#ffffff">VLAN 20 &#183; Servers &#183; 192.168.20.0/24</text>
-  <rect x="484" y="270" width="150" height="28" rx="6" fill="#e0a200"/>
-  <text class="colhead" x="559" y="289" text-anchor="middle" fill="#ffffff">VLAN 30 &#183; IoT &#183; 192.168.30.0/24</text>
-  <rect x="642" y="270" width="150" height="28" rx="6" fill="#e0a200"/>
-  <text class="colhead" x="717" y="289" text-anchor="middle" fill="#ffffff">VLAN 40 &#183; Guest &#183; 192.168.40.0/24</text>
-  <rect x="800" y="270" width="150" height="28" rx="6" fill="#9334e6"/>
-  <text class="colhead" x="875" y="289" text-anchor="middle" fill="#ffffff">VLAN 50 &#183; Lab &#183; 192.168.50.0/24</text>
+  <rect x="10" y="270" width="150" height="34" rx="6" fill="#9aa0a6"/>
+  <text class="colhead" x="85" y="284" text-anchor="middle" fill="#ffffff">VLAN 1 &#183; Management</text>
+  <text class="colhead" x="85" y="298" text-anchor="middle" fill="#ffffff" style="font-size:10.5px;font-weight:500">192.168.0.0/24</text>
+  <rect x="168" y="270" width="150" height="34" rx="6" fill="#4285f4"/>
+  <text class="colhead" x="243" y="284" text-anchor="middle" fill="#ffffff">VLAN 10 &#183; Trusted</text>
+  <text class="colhead" x="243" y="298" text-anchor="middle" fill="#ffffff" style="font-size:10.5px;font-weight:500">192.168.10.0/24</text>
+  <rect x="326" y="270" width="150" height="34" rx="6" fill="#12a594"/>
+  <text class="colhead" x="401" y="284" text-anchor="middle" fill="#ffffff">VLAN 20 &#183; Servers</text>
+  <text class="colhead" x="401" y="298" text-anchor="middle" fill="#ffffff" style="font-size:10.5px;font-weight:500">192.168.20.0/24</text>
+  <rect x="484" y="270" width="150" height="34" rx="6" fill="#e0a200"/>
+  <text class="colhead" x="559" y="284" text-anchor="middle" fill="#ffffff">VLAN 30 &#183; IoT</text>
+  <text class="colhead" x="559" y="298" text-anchor="middle" fill="#ffffff" style="font-size:10.5px;font-weight:500">192.168.30.0/24</text>
+  <rect x="642" y="270" width="150" height="34" rx="6" fill="#e0a200"/>
+  <text class="colhead" x="717" y="284" text-anchor="middle" fill="#ffffff">VLAN 40 &#183; Guest</text>
+  <text class="colhead" x="717" y="298" text-anchor="middle" fill="#ffffff" style="font-size:10.5px;font-weight:500">192.168.40.0/24</text>
+  <rect x="800" y="270" width="150" height="34" rx="6" fill="#9334e6"/>
+  <text class="colhead" x="875" y="284" text-anchor="middle" fill="#ffffff">VLAN 50 &#183; Lab</text>
+  <text class="colhead" x="875" y="298" text-anchor="middle" fill="#ffffff" style="font-size:10.5px;font-weight:500">192.168.50.0/24</text>
 
   <!-- Management column content -->
   <g class="box mgmt">
@@ -89,8 +95,8 @@
   </g>
   <g class="box trusted">
     <rect x="168" y="412" width="150" height="54" rx="6"/>
-    <text class="name" x="178" y="430">Pi 1 &#8212; Pi-hole + VPN</text>
-    <text class="meta" x="178" y="443">firewall: ufw</text>
+    <text class="name" x="178" y="430">Pi 1 &#8212; DNS + Tailscale</text>
+    <text class="meta" x="178" y="443">fail2ban &#183; key-only SSH</text>
     <text class="meta" x="178" y="456">DNS (53) open to all VLANs</text>
   </g>
   <g class="box trusted" stroke-dasharray="4 3">
@@ -108,7 +114,7 @@
   <g class="box servers">
     <rect x="326" y="362" width="150" height="46" rx="6"/>
     <text class="name" x="336" y="381">Proxmox (Mini PC)</text>
-    <text class="meta" x="336" y="395">firewall: Proxmox FW &#183; runs Jellyfin</text>
+    <text class="meta" x="336" y="395">Proxmox FW &#183; runs Jellyfin</text>
   </g>
   <g class="box servers" stroke-dasharray="4 3">
     <rect x="326" y="416" width="150" height="46" rx="6"/>
@@ -154,11 +160,11 @@
   <!-- Firewall rules summary -->
   <rect x="10" y="590" width="940" height="118" rx="10" fill="#f8f9fa" stroke="#dadce0" stroke-width="1"/>
   <text class="grouptitle" x="26" y="614">Network-layer rules (enforced on UCG-Fiber)</text>
-  <text class="note" x="26" y="633">Trusted &#8594; Servers: ALLOW &#160;&#183;&#160; Servers &#8594; Trusted: BLOCK &#160;&#183;&#160; IoT / Guest / Lab &#8594; any internal zone: BLOCK (internet only)</text>
-  <text class="note" x="26" y="650">Any zone &#8594; Pi 1 port 53 UDP: ALLOW (DNS exception so Pi-hole serves the whole network) &#160;&#183;&#160; Internet &#8594; Pi 1 port 51820 UDP: ALLOW (WireGuard)</text>
+  <text class="note" x="26" y="633">Trusted &#8594; Servers: ALLOW &#160;&#183;&#160; Servers &#8594; Trusted: BLOCK new (replies allowed) &#160;&#183;&#160; IoT / Guest / Lab &#8594; any internal zone: BLOCK (internet only)</text>
+  <text class="note" x="26" y="650">Any zone &#8594; Pi 1 port 53 UDP: ALLOW (DNS exception so Pi-hole serves the whole network) &#160;&#183;&#160; Internet &#8594; inside: no port forwards (Tailscale is outbound-only)</text>
 
   <text class="grouptitle" x="26" y="676">Host-layer firewalls (per device, defense in depth)</text>
-  <text class="note" x="26" y="695">NAS: UGOS deny-all + allow-list &#160;&#183;&#160; Proxmox: built-in firewall &#160;&#183;&#160; Pi 1: ufw &#160;&#183;&#160; Pi 2: nftables (VLAN-aware)</text>
+  <text class="note" x="26" y="695">NAS: UGOS deny-all + allow-list &#160;&#183;&#160; Proxmox: built-in firewall &#160;&#183;&#160; Pi 1: fail2ban + ufw (staged) &#160;&#183;&#160; Pi 2: nftables (VLAN-aware)</text>
 
   <!-- Legend -->
   <line x1="10" y1="732" x2="950" y2="732" stroke="#e0e0e0" stroke-width="1"/>
@@ -173,5 +179,5 @@
   <rect x="450" y="748" width="13" height="13" rx="3" fill="#9334e6"/>
   <text class="meta" x="469" y="759">Lab (isolated sandbox)</text>
 
-  <text class="note" x="10" y="787">Moved to a single-level home &#8212; the old downstairs/upstairs split is gone. ASUS now runs purely as a bridge-mode AP wired to the core switch. Pi 1 and Pi 2 confirmed working on their correct VLANs after the move.</text>
+  <text class="note" x="10" y="787">Moved back to a two-floor home on AT&amp;T Fiber (BGW320 in IP Passthrough). Remote access moved from WireGuard to a Tailscale subnet router on Pi 1, so nothing is port-forwarded.</text>
 </svg>

@@ -10,14 +10,14 @@ This repo documents the real build: the architecture, the configs, and the actua
 
 **Network core:** UniFi UCG-Fiber gateway → UniFi Pro XG 8 PoE (10G core switch) → UniFi Flex 2.5G PoE (access switch), with six segmented VLANs enforced by zone-based firewall rules.
 
-| VLAN | Purpose | Subnet |
-|---|---|---|
-| Management | UniFi infrastructure control plane | 192.168.1.0/24 |
-| Trusted | Personal devices, gaming PC/console | 192.168.10.0/24 |
-| Servers | NAS, hypervisor host, app Pis | 192.168.20.0/24 |
-| IoT | Reserved — smart home / cameras | 192.168.30.0/24 |
-| Guest | Reserved — visitor WiFi | 192.168.40.0/24 |
-| Lab | Isolated security sandbox | 192.168.50.0/24 |
+| VLAN | Purpose | Subnet | Firewall zone |
+|---|---|---|---|
+| Management | UniFi infrastructure control plane | 192.168.0.0/24 | Internal |
+| Trusted | Personal devices, gaming PC/console | 192.168.10.0/24 | Internal |
+| Servers | NAS, hypervisor host, app Pis | 192.168.20.0/24 | Internal |
+| IoT | Reserved — smart home / cameras | 192.168.30.0/24 | Hotspot |
+| Guest | Reserved — visitor WiFi | 192.168.40.0/24 | Hotspot |
+| Lab | Isolated security sandbox | 192.168.50.0/24 | DMZ |
 
 **Compute:** A Proxmox VE hypervisor host running Jellyfin (media, hardware-transcoded via Intel QuickSync), with a planned SIEM, Windows Server/AD, and an isolated attack range as additional VMs.
 
@@ -27,12 +27,12 @@ This repo documents the real build: the architecture, the configs, and the actua
 
 | Device | Role | Status |
 |---|---|---|
-| Pi 1 | Network-wide DNS filtering (Pi-hole) + WireGuard VPN | ✅ Live |
+| Pi 1 | Network-wide DNS filtering (Pi-hole, DNSSEC) + Tailscale subnet router, hardened ([details](./docs/pi1_hardening.md)) | ✅ Live |
 | Pi 2 | Intrusion detection sensor (Suricata, 52,985 active signatures) + host firewall (nftables) | ✅ Live |
 | Pi 3 | Self-hosted apps (Vaultwarden, Nextcloud) | 🔲 Planned |
 | Pi 4 | Observability (Grafana + Prometheus + Uptime Kuma) | 🔲 Planned |
 
-**Remote access:** WireGuard VPN with the client's traffic routed through the internal DNS filter — no port forwarding beyond a single UDP port, exposed only to the tunnel itself.
+**Remote access:** Tailscale (WireGuard-based mesh VPN). Pi 1 is the single subnet router for the Trusted and Servers VLANs; Proxmox and Pi 2 also run Tailscale directly. Access is governed by tailnet access rules (grants) and per-server key-expiry settings, with device approval next on the list. The old WireGuard server (PiVPN) has been retired, and closing its UDP port forward leaves **no inbound ports open** on the WAN.
 
 ---
 
@@ -42,7 +42,9 @@ This repo documents the real build: the architecture, the configs, and the actua
 - A verified, alert-generating IDS sensor — see [`incident-reports/`](./incident-reports) for a real detection walkthrough
 - Self-hosted media platform (Jellyfin) with request management (Jellyseerr)
 - Hypervisor-backed virtualization with NAS-integrated shared storage
-- Site-to-site remote access via WireGuard, with double-NAT diagnosed and resolved at the ISP level
+- Remote access via a Tailscale subnet router, replacing the original WireGuard server (double-NAT behind the ISP gateway diagnosed and resolved during the move)
+- A hardened DNS and remote-access host: key-only SSH, fail2ban, automatic security patching, DNSSEC and a staged default-deny firewall, each verified with a test ([`docs/pi1_hardening.md`](./docs/pi1_hardening.md))
+- Real-time alert pipeline: Suricata and UniFi IPS alerts pushed to a phone via ntfy, with benign signatures triaged in [`docs/suricata_alert_triage.md`](./docs/suricata_alert_triage.md)
 
 ## In progress / roadmap
 
@@ -50,7 +52,7 @@ This repo documents the real build: the architecture, the configs, and the actua
 - Windows Server + Active Directory — identity/access management lab
 - An isolated attacker/target pair (Kali + Metasploitable2) for hands-on detection engineering, mapped to MITRE ATT&CK
 - Kubernetes (k3s) and Terraform-managed infrastructure — closing the containerization and IaC gap
-- A public/hybrid cloud project (Azure or AWS free tier) linked back to this network via WireGuard
+- A public/hybrid cloud project (Azure or AWS free tier) linked back to this network via Tailscale or WireGuard
 
 Full roadmap and certification mapping: [`docs/gap-closure-roadmap.md`](./docs/gap-closure-roadmap.md)
 
@@ -60,6 +62,7 @@ Full roadmap and certification mapping: [`docs/gap-closure-roadmap.md`](./docs/g
 
 Real problems, diagnosed and resolved — not staged tutorials.
 
+- [**2026-11-05 — Remote access to the Servers VLAN failing: duplicate subnet router + a block rule dropping replies**](./incident-reports/2026-11-05-tailscale-subnet-route-conflict.md)
 - [**2026-09-27 — Suricata false "no detections" after relocation, root cause: self-referential DNS**](./incident-reports/2026-09-27-suricata-dns-after-move.md)
 
 ---
@@ -72,6 +75,6 @@ Full network, rack, and career-mapping diagrams live in [`diagrams/`](./diagrams
 
 ## Technologies
 
-`Proxmox VE` `UniFi Network` `VLANs & Zone Firewalls` `WireGuard` `Suricata IDS` `nftables` `Pi-hole` `Docker` `Jellyfin` `SMB/CIFS` `Raspberry Pi OS` `Linux Administration`
+`Proxmox VE` `UniFi Network` `VLANs & Zone Firewalls` `Tailscale` `WireGuard` `Suricata IDS` `ntfy` `fail2ban` `ufw` `DNSSEC` `nftables` `Pi-hole` `Docker` `Jellyfin` `SMB/CIFS` `Raspberry Pi OS` `Linux Administration`
 
 *(Planned: Wazuh, Windows Server/AD, Kali, Kubernetes, Terraform, Azure/AWS)*
