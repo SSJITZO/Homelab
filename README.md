@@ -32,7 +32,7 @@ This repo documents the real build: the architecture, the configs, and the actua
 | Pi 3 | Self-hosted apps (Vaultwarden, Nextcloud) | 🔲 Planned |
 | Pi 4 | Observability (Grafana + Prometheus + Uptime Kuma) | 🔲 Planned |
 
-**Remote access:** Tailscale (WireGuard-based mesh VPN). Pi 1 is the single subnet router for the Trusted and Servers VLANs; Proxmox and Pi 2 also run Tailscale directly. Access is governed by tailnet access rules (grants) and per-server key-expiry settings, with device approval next on the list. The old WireGuard server (PiVPN) has been retired, and closing its UDP port forward leaves **no inbound ports open** on the WAN.
+**Remote access:** Tailscale (WireGuard-based mesh VPN). Pi 1 is the single subnet router for the Trusted and Servers VLANs; Proxmox and Pi 2 also run Tailscale directly. Access is governed by tailnet access rules (grants) and per-server key-expiry settings, with device approval next on the list. The old WireGuard server (PiVPN) has been removed along with its port forward, so the gateway has **zero port forwards: no inbound ports are open** on the WAN.
 
 ---
 

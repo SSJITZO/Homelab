@@ -10,7 +10,7 @@ Pi 1 is the highest-value box on the network: every device in the house depends 
 
 | Control | What was done | How it was verified |
 |---|---|---|
-| Remote access | Replaced the WireGuard server (PiVPN) with a Tailscale subnet router. Pi 1 is the only router; no tags, routes approved by hand, key expiry disabled | NAS and Proxmox reachable from an off-site laptop through Pi 1 ([incident report](../incident-reports/2026-11-05-tailscale-subnet-route-conflict.md)) |
+| Remote access | Replaced the WireGuard server (PiVPN) with a Tailscale subnet router. Pi 1 is the only router; no tags, routes approved by hand, key expiry disabled | NAS and Proxmox reachable from an off-site laptop through Pi 1 ([incident report](../incident-reports/2026-11-05-tailscale-subnet-route-conflict.md)); nothing listening on UDP 51820, no `wg0` interface, zero port forwards on the gateway |
 | SSH authentication | Key-only login with per-device ed25519 keys (PC and laptop). Password, keyboard-interactive and root login disabled; `MaxAuthTries 3`; `AllowUsers` limited to one account | `sshd -T` shows all three set to `no`; a forced password login is refused with `Permission denied (publickey)` |
 | Brute-force protection | fail2ban with an `sshd` jail on the systemd journal | `fail2ban-client status sshd`: jail active, one address already banned |
 | Patching | `unattended-upgrades` installing Debian-Security updates daily, with no automatic reboot (so the house never loses DNS unexpectedly) | Dry run lists the allowed origins, including Debian-Security, and the pending security packages |
