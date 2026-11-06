@@ -160,7 +160,7 @@
   <!-- Firewall rules summary -->
   <rect x="10" y="590" width="940" height="118" rx="10" fill="#f8f9fa" stroke="#dadce0" stroke-width="1"/>
   <text class="grouptitle" x="26" y="614">Network-layer rules (enforced on UCG-Fiber)</text>
-  <text class="note" x="26" y="633">Trusted &#8594; Servers: ALLOW &#160;&#183;&#160; Servers &#8594; Trusted: BLOCK new (replies allowed) &#160;&#183;&#160; IoT / Guest / Lab &#8594; any internal zone: BLOCK (internet only)</text>
+  <text class="note" x="26" y="633">Trusted &#8594; Servers: Pi 1 (subnet router) + Jellyfin 8096 only &#160;&#183;&#160; Servers &#8594; Trusted: BLOCK new (replies allowed) &#160;&#183;&#160; IoT / Guest / Lab &#8594; any internal zone: BLOCK (internet only)</text>
   <text class="note" x="26" y="650">Any zone &#8594; Pi 1 port 53 UDP: ALLOW (DNS exception so Pi-hole serves the whole network) &#160;&#183;&#160; Internet &#8594; inside: no port forwards (Tailscale is outbound-only)</text>
 
   <text class="grouptitle" x="26" y="676">Host-layer firewalls (per device, defense in depth)</text>

@@ -52,4 +52,4 @@ After replacing the WireGuard server with Tailscale, the NAS could not be reache
 - [x] Fix the block rule's connection state and re-test from Pi 1.
 - [x] Re-test from outside the network: the NAS web page opened from a laptop at a different location, over Tailscale through Pi 1.
 - [x] Remove the WireGuard server and its UDP port forward: PiVPN uninstalled, nothing listening on UDP 51820, no `wg0` interface, and the gateway shows zero port forwards.
-- [ ] Replace the broad "Trusted to Servers – Allow" with least-privilege rules (Pi 1 and admin devices only), and remove the now-redundant "Pi 1 to NAS" rule.
+- [x] Replace the broad "Trusted to Servers – Allow" with least privilege: "Pi 1 to Servers" (the subnet router, which carries all remote access), "Trusted to Jellyfin" (TCP 8096 on the NAS only), then "Trusted to Servers – Block" for new connections. Pi 1 still reaches the NAS (445) and Proxmox (8006) with the block in place.
