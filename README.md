@@ -54,7 +54,7 @@ This repo documents the real build: the architecture, the configs, and the actua
 - Kubernetes (k3s) and Terraform-managed infrastructure — closing the containerization and IaC gap
 - A public/hybrid cloud project (Azure or AWS free tier) linked back to this network via Tailscale or WireGuard
 
-Full roadmap and certification mapping: [`docs/gap-closure-roadmap.md`](./docs/gap-closure-roadmap.md)
+Full roadmap and certification mapping: [`docs/gap_closure_roadmap.md`](./docs/gap_closure_roadmap.md)
 
 ---
 
@@ -62,6 +62,7 @@ Full roadmap and certification mapping: [`docs/gap-closure-roadmap.md`](./docs/g
 
 Real problems, diagnosed and resolved — not staged tutorials.
 
+- [**2026-11-08 — Servers VLAN losing DNS: missing allow, rule-ID ordering, and Pi-hole ignoring routed clients**](./incident-reports/2026-11-08-servers-vlan-dns-failure.md)
 - [**2026-11-05 — Remote access to the Servers VLAN failing: duplicate subnet router + a block rule dropping replies**](./incident-reports/2026-11-05-tailscale-subnet-route-conflict.md)
 - [**2026-09-27 — Suricata false "no detections" after relocation, root cause: self-referential DNS**](./incident-reports/2026-09-27-suricata-dns-after-move.md)
 
