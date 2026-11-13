@@ -15,7 +15,7 @@ This repo documents the real build: the architecture, the configs, and the actua
 | Management | UniFi infrastructure control plane | 192.168.0.0/24 | Internal |
 | Trusted | Personal devices, gaming PC/console | 192.168.10.0/24 | Internal |
 | Servers | NAS, hypervisor host, app Pis | 192.168.20.0/24 | Internal |
-| IoT | Reserved — smart home / cameras | 192.168.30.0/24 | Hotspot |
+| IoT | Smart home / streaming devices | 192.168.30.0/24 | IoT (custom zone: internet and gateway only) |
 | Guest | Reserved — visitor WiFi | 192.168.40.0/24 | Hotspot |
 | Lab | Isolated security sandbox | 192.168.50.0/24 | DMZ |
 
@@ -28,7 +28,7 @@ This repo documents the real build: the architecture, the configs, and the actua
 | Device | Role | Status |
 |---|---|---|
 | Pi 1 | Network-wide DNS filtering (Pi-hole, DNSSEC) + Tailscale subnet router, hardened ([details](./docs/pi1_hardening.md)) | ✅ Live |
-| Pi 2 | Intrusion detection sensor (Suricata, 52,985 active signatures) + host firewall (nftables) | ✅ Live |
+| Pi 2 | Intrusion detection sensor (Suricata, 52,985 active signatures, tuned suppressions) + host firewall (nftables); key-only SSH, fail2ban, automatic security updates, pinned DNS | ✅ Live |
 | Pi 3 | Self-hosted apps (Vaultwarden, Nextcloud) | 🔲 Planned |
 | Pi 4 | Observability (Grafana + Prometheus + Uptime Kuma) | 🔲 Planned |
 
@@ -44,7 +44,7 @@ This repo documents the real build: the architecture, the configs, and the actua
 - Hypervisor-backed virtualization with NAS-integrated shared storage
 - Remote access via a Tailscale subnet router, replacing the original WireGuard server (double-NAT behind the ISP gateway diagnosed and resolved during the move)
 - A hardened DNS and remote-access host: key-only SSH, fail2ban, automatic security patching, DNSSEC and a staged default-deny firewall, each verified with a test ([`docs/pi1_hardening.md`](./docs/pi1_hardening.md))
-- Real-time alert pipeline: Suricata and UniFi IPS alerts pushed to a phone via ntfy, with benign signatures triaged in [`docs/suricata_alert_triage.md`](./docs/suricata_alert_triage.md)
+- Real-time alert pipeline: Suricata and UniFi IPS alerts pushed to a phone via ntfy, with benign signatures triaged and suppressed in [`docs/suricata_alert_triage.md`](./docs/suricata_alert_triage.md)
 
 ## In progress / roadmap
 
