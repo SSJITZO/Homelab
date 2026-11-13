@@ -76,7 +76,7 @@
   <g class="box compute">
     <rect x="52" y="303" width="320" height="40" rx="6"/>
     <text class="t" x="64" y="321">Mini PC / Kamrui  &#183;  shelf</text>
-    <text class="s" x="64" y="335">Jellyfin + Proxmox host</text>
+    <text class="s" x="64" y="335">Proxmox host &#183; lab VMs</text>
     <text class="u" x="360" y="327" text-anchor="end">1U</text>
   </g>
 
@@ -141,7 +141,7 @@
   <g class="box ontop">
     <rect x="432" y="102" width="308" height="54" rx="8"/>
     <text class="t" x="446" y="126">UGREEN DXP4800 Plus &#8212; NAS</text>
-    <text class="s" x="446" y="142">4-bay &#183; HDDs + NVMe cache + RAM</text>
+    <text class="s" x="446" y="142">4-bay &#183; NVMe cache &#183; runs Jellyfin</text>
   </g>
 
   <g class="box ontop">

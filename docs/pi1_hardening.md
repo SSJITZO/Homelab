@@ -10,10 +10,11 @@ Pi 1 is the highest-value box on the network: every device in the house depends 
 
 | Control | What was done | How it was verified |
 |---|---|---|
-| Remote access | Replaced the WireGuard server (PiVPN) with a Tailscale subnet router. Pi 1 is the only router; no tags, routes approved by hand, key expiry disabled | NAS and Proxmox reachable from an off-site laptop through Pi 1 ([incident report](../incident-reports/2026-11-05-tailscale-subnet-route-conflict.md)) |
+| Remote access | Replaced the WireGuard server (PiVPN) with a Tailscale subnet router. Pi 1 is the only router; no tags, routes approved by hand, key expiry disabled | NAS and Proxmox reachable from an off-site laptop through Pi 1 ([incident report](../incident-reports/2026-11-05-tailscale-subnet-route-conflict.md)); nothing listening on UDP 51820, no `wg0` interface, zero port forwards on the gateway |
 | SSH authentication | Key-only login with per-device ed25519 keys (PC and laptop). Password, keyboard-interactive and root login disabled; `MaxAuthTries 3`; `AllowUsers` limited to one account | `sshd -T` shows all three set to `no`; a forced password login is refused with `Permission denied (publickey)` |
 | Brute-force protection | fail2ban with an `sshd` jail on the systemd journal | `fail2ban-client status sshd`: jail active, one address already banned |
 | Patching | `unattended-upgrades` installing Debian-Security updates daily, with no automatic reboot (so the house never loses DNS unexpectedly) | Dry run lists the allowed origins, including Debian-Security, and the pending security packages |
+| DNS scope | Listening mode changed from `LOCAL` to `ALL` so every home VLAN can resolve through Pi-hole; exposure is controlled by the network instead (zero port forwards, UniFi zone policies, and the host firewall below) | `nslookup` from the Servers VLAN returns an answer, and `tcpdump` on Pi 1 shows the query in and the reply out ([incident report](../incident-reports/2026-11-08-servers-vlan-dns-failure.md)) |
 | DNS integrity | DNSSEC validation turned on in Pi-hole | `dnssec-failed.org` returns `SERVFAIL` (forged answer rejected); `cloudflare.com` returns `NOERROR` |
 | Software currency | Pi-hole updated to Core 6.5, Web 6.6.1, FTL 6.8 | `pihole -v` reports every component at its latest version |
 | Configuration backup | Pi-hole Teleporter export, kept off the device | Backup archive created and copied to a separate machine |

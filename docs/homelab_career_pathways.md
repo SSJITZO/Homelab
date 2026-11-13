@@ -32,7 +32,8 @@ This maps your homelab build to four realistic career paths, with the certificat
 - ✅ Cabling/media decisions — Cat6a vs SFP+ DAC, PoE budgets
 - 🔲 **Gap: Cisco IOS CLI syntax.** UniFi's GUI doesn't teach this. **Fix: recreate your topology in Cisco Packet Tracer** (already planned) — this is what actually closes the CCNA/CCNP gap.
 - 🔲 **Gap: dynamic routing protocols** (OSPF, EIGRP). Not present in a single-gateway home network — study this separately, Packet Tracer can simulate it.
-- 🔲 **Least-privilege segmentation.** Replace the broad Trusted → Servers allow with per-device rules (subnet router and admin devices only), move Management into its own zone, and send unused switch ports to a blackhole VLAN.
+- ✅ **Least-privilege segmentation** — the broad Trusted → Servers allow replaced with two narrow rules (the subnet router, and Jellyfin on one port) ahead of a stateful block, verified with before/after tests
+- 🔲 **Further segmentation.** Move Management into its own zone and send unused switch ports to a blackhole VLAN.
 - 🔲 **Edge hardening.** UPnP off, IPS set to block, WPA3 plus separate IoT and Guest SSIDs with client isolation, firmware and config backups on a schedule.
 - 🔲 **DNS redundancy and internal names.** A second Pi-hole as backup DNS, plus a reverse proxy with `home.arpa` names and internal TLS for every web UI.
 - 🔲 **Lab 06 — Security Architect:** zero-trust segmentation and a STRIDE threat model, compared against the real VLAN and zone design.
