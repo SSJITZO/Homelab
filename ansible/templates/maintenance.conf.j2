@@ -1,0 +1,6 @@
+# Managed by Ansible - edit host_vars/{{ inventory_hostname }}.yml, not this file.
+NTFY_URL="{{ ntfy_ops_url }}"
+REBOOT="{{ maint_reboot | default('auto') }}"
+VERIFY_SERVICES="{{ verify_services }}"
+VERIFY_UFW={{ verify_ufw }}
+VERIFY_DNS="{{ verify_dns }}"

@@ -1,0 +1,77 @@
+# maintenance.yml - install the monthly maintenance job on every host it targets.
+# The same playbook works for any machine; what differs (time, services to
+# verify, notification topic) lives in host_vars/<host>.yml.
+#
+#   ansible-playbook maintenance.yml -K            install / bring up to date
+#   ansible-playbook maintenance.yml -K --check    show what would change
+
+- name: Monthly maintenance job
+  hosts: pi2
+  become: true
+
+  tasks:
+    - name: dig is installed (the boot check uses it)
+      ansible.builtin.apt:
+        name: bind9-dnsutils
+        state: present
+
+    - name: Maintenance scripts are installed
+      ansible.builtin.copy:
+        src: "../automation/maintenance/{{ item }}"
+        dest: "/usr/local/bin/{{ item }}"
+        owner: root
+        group: root
+        mode: "0755"
+      loop:
+        - monthly-maintenance.sh
+        - maintenance-verify.sh
+
+    - name: Config folder exists
+      ansible.builtin.file:
+        path: /etc/maintenance
+        state: directory
+        mode: "0755"
+
+    - name: Config file matches this host's settings
+      ansible.builtin.template:
+        src: templates/maintenance.conf.j2
+        dest: /etc/maintenance/maintenance.conf
+        owner: root
+        group: root
+        mode: "0600"
+
+    - name: systemd service units are installed
+      ansible.builtin.copy:
+        src: "../automation/maintenance/{{ item }}"
+        dest: "/etc/systemd/system/{{ item }}"
+        mode: "0644"
+      loop:
+        - monthly-maintenance.service
+        - maintenance-verify.service
+      notify: Reload systemd
+
+    - name: Timer runs at this host's time on the 1st
+      ansible.builtin.template:
+        src: templates/monthly-maintenance.timer.j2
+        dest: /etc/systemd/system/monthly-maintenance.timer
+        mode: "0644"
+      notify: Reload systemd
+
+    - name: systemd has read any new or changed units
+      ansible.builtin.meta: flush_handlers
+
+    - name: Boot check is enabled
+      ansible.builtin.systemd:
+        name: maintenance-verify.service
+        enabled: true
+
+    - name: Timer is enabled and running
+      ansible.builtin.systemd:
+        name: monthly-maintenance.timer
+        enabled: true
+        state: started
+
+  handlers:
+    - name: Reload systemd
+      ansible.builtin.systemd:
+        daemon_reload: true

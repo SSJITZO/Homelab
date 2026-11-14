@@ -1,0 +1,4 @@
+# Real inventory and per-host settings hold usernames and notification topics
+inventory.ini
+host_vars/*.yml
+!host_vars/*.example.yml

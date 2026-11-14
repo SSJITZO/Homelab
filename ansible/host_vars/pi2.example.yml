@@ -1,0 +1,6 @@
+# Copy to host_vars/pi2.yml (not committed): it holds the notification topic.
+ntfy_ops_url: "https://ntfy.sh/CHANGE-ME"
+maint_time: "02:30:00"
+verify_services: "suricata suricata-notify fail2ban tailscaled"
+verify_ufw: 0
+verify_dns: "1.1.1.1"
