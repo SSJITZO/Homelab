@@ -1,6 +1,6 @@
 # Pi 1 Hardening: DNS Server and Subnet Router
 
-**Date:** 2026-11-05
+**Date:** 2026-11-05 (firewall enabled 2026-11-13)
 **Host:** Pi 1 (Raspberry Pi 5, Raspberry Pi OS / Debian 13 "trixie", Trusted VLAN — 192.168.10.20)
 **Roles:** Network-wide DNS filtering (Pi-hole v6) and the Tailscale subnet router for remote access
 
@@ -18,21 +18,45 @@ Pi 1 is the highest-value box on the network: every device in the house depends 
 | DNS integrity | DNSSEC validation turned on in Pi-hole | `dnssec-failed.org` returns `SERVFAIL` (forged answer rejected); `cloudflare.com` returns `NOERROR` |
 | Software currency | Pi-hole updated to Core 6.5, Web 6.6.1, FTL 6.8 | `pihole -v` reports every component at its latest version |
 | Configuration backup | Pi-hole Teleporter export, kept off the device | Backup archive created and copied to a separate machine |
-| Host firewall | ufw installed with a default-deny inbound policy and explicit allows (below) | Staged with all rules in place; to be enabled on site with an automatic rollback timer |
+| Host firewall | ufw enabled with a default-deny inbound and routed policy and explicit allows (below), rolled out on site behind an automatic rollback timer | Five access tests run before the rollback was cancelled (below) |
 
-## Planned firewall policy
+## Firewall policy (enabled 2026-11-13)
 
 ```
-Default: deny (incoming), allow (outgoing)
+Default: deny (incoming), allow (outgoing), deny (routed)
 allow in on tailscale0                      # owner's devices over Tailscale
 route allow in on tailscale0 out on eth0    # keeps the subnet route working
 allow 53 from 192.168.0.0/16                # DNS for every home VLAN
 allow 22/tcp from 192.168.10.0/24           # SSH from the Trusted VLAN only
 allow 80/tcp from 192.168.10.0/24           # Pi-hole admin from the Trusted VLAN only
-allow 41641/udp                             # Tailscale direct connections
 ```
 
 The `route allow` line matters: ufw drops forwarded traffic by default, which would silently break the subnet router even though every other service kept working.
+
+### Rollout with a rollback timer
+
+Pi 1 is the only way into the network from outside, so a wrong rule could lock out every remote session. The change was made on site, with a timer that switches the firewall off again if nobody cancels it:
+
+```bash
+sudo systemd-run --on-active=10min ufw disable   # automatic rollback in 10 minutes
+sudo ufw enable
+# ...run the access tests, keeping the original session open...
+sudo systemctl stop run-<id>.timer               # cancel the rollback once every test passes
+```
+
+### Verification
+
+| Test | From | Result |
+|---|---|---|
+| Rules loaded as designed | Pi 1 (`ufw status verbose`) | Default deny incoming and routed; five allows as above |
+| DNS lookup | Laptop on the Management VLAN (`nslookup example.com 192.168.10.20`) | Answered: DNS is open to every home VLAN |
+| SSH and Pi-hole admin, direct | Laptop on the Management VLAN | Timed out, as intended: only the Trusted VLAN may reach them |
+| SSH and Pi-hole admin, over Tailscale | Same laptop with Tailscale connected | Both work: traffic arrives on `tailscale0` |
+| Remote access from outside | Phone on mobile data with Tailscale | Pi-hole admin loads |
+
+The blocked direct test was a useful finding rather than a fault. The house Wi-Fi access point currently places its clients on the Management VLAN, so admin access from Wi-Fi now goes through Tailscale, which is one authenticated path. Moving Wi-Fi to UniFi access points with a Trusted SSID will restore direct access from personal devices without widening the firewall.
+
+**Defence in depth for DNS:** Pi-hole answers queries from every origin, but three independent layers stop anything outside the house from using it: zero port forwards on the gateway, the UniFi zone policies, and this host firewall.
 
 ## Problems found during hardening
 
