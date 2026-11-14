@@ -53,6 +53,7 @@ sudo systemctl stop run-<id>.timer               # cancel the rollback once ever
 | SSH and Pi-hole admin, direct | Laptop on the Management VLAN | Timed out, as intended: only the Trusted VLAN may reach them |
 | SSH and Pi-hole admin, over Tailscale | Same laptop with Tailscale connected | Both work: traffic arrives on `tailscale0` |
 | Remote access from outside | Phone on mobile data with Tailscale | Pi-hole admin loads |
+| Survives a reboot | Pi 1, after a full OS upgrade (kernel 6.18.34 to 6.18.60) and reboot | Firewall active, Pi-hole FTL active and Tailscale online with no manual steps; SSH back in over Tailscale |
 
 The blocked direct test was a useful finding rather than a fault. The house Wi-Fi access point currently places its clients on the Management VLAN, so admin access from Wi-Fi now goes through Tailscale, which is one authenticated path. Moving Wi-Fi to UniFi access points with a Trusted SSID will restore direct access from personal devices without widening the firewall.
 
@@ -65,7 +66,7 @@ Two controls looked enabled but weren't. Both were caught only because each cont
 1. **Password SSH was still on.** A hardening file in `/etc/ssh/sshd_config.d/` set `PasswordAuthentication no`, but `sshd -T` still reported `yes`. Raspberry Pi Imager writes `50-cloud-init.conf` with `PasswordAuthentication yes`, and sshd keeps the **first** value it reads, in alphabetical file order. Renaming the hardening file to `01-hardening.conf` fixed it.
 2. **Automatic updates were on but installing nothing.** `20auto-upgrades` enabled the daily job, but the policy file `50unattended-upgrades` had been deleted. With no allowed origins, every run found "no packages," while 18 packages were pending. Restored with `apt install --reinstall -o Dpkg::Options::="--force-confmiss" unattended-upgrades`; the next dry run selected the pending security updates.
 
-A side effect was also recorded: installing ufw removed `iptables-persistent` and `netfilter-persistent`. Any saved rules in `/etc/iptables/` are being checked to confirm only the retired WireGuard NAT rules were lost.
+A side effect was also recorded: installing ufw removed `iptables-persistent` and `netfilter-persistent`, so the rules saved in `/etc/iptables/` are no longer loaded at boot. The saved file was reviewed: apart from one DNS allow on the retired WireGuard interface (`wg0`), every rule belonged to Tailscale, which rebuilds its own chains each time it starts. Nothing in use was lost, which the reboot test confirmed.
 
 ## Skills demonstrated
 
