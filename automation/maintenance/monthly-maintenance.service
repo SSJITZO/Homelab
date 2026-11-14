@@ -1,0 +1,9 @@
+[Unit]
+Description=Monthly OS and Pi-hole updates
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/monthly-maintenance.sh
+TimeoutStartSec=1h

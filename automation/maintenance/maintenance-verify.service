@@ -1,0 +1,12 @@
+[Unit]
+Description=Report health after a maintenance reboot
+Wants=network-online.target
+After=network-online.target pihole-FTL.service tailscaled.service
+ConditionPathExists=/var/lib/maintenance/verify-after-boot
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/maintenance-verify.sh
+
+[Install]
+WantedBy=multi-user.target
