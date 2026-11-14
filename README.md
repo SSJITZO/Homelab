@@ -44,6 +44,7 @@ This repo documents the real build: the architecture, the configs, and the actua
 - Hypervisor-backed virtualization with NAS-integrated shared storage
 - Remote access via a Tailscale subnet router, replacing the original WireGuard server (double-NAT behind the ISP gateway diagnosed and resolved during the move)
 - A hardened DNS and remote-access host: key-only SSH, fail2ban, automatic security patching, DNSSEC and a default-deny host firewall rolled out behind an automatic rollback timer, each verified with a test ([`docs/pi1_hardening.md`](./docs/pi1_hardening.md))
+- Unattended monthly patching for the DNS server: full upgrade and Pi-hole update at 02:00, reboot only when required, a post-reboot health check and phone notifications ([`automation/maintenance/`](./automation/maintenance))
 - Real-time alert pipeline: Suricata and UniFi IPS alerts pushed to a phone via ntfy, with benign signatures triaged and suppressed in [`docs/suricata_alert_triage.md`](./docs/suricata_alert_triage.md)
 
 ## In progress / roadmap
@@ -76,6 +77,6 @@ Full network, rack, and career-mapping diagrams live in [`diagrams/`](./diagrams
 
 ## Technologies
 
-`Proxmox VE` `UniFi Network` `VLANs & Zone Firewalls` `Tailscale` `WireGuard` `Suricata IDS` `ntfy` `fail2ban` `ufw` `DNSSEC` `nftables` `Pi-hole` `Docker` `Jellyfin` `SMB/CIFS` `Raspberry Pi OS` `Linux Administration`
+`Proxmox VE` `UniFi Network` `VLANs & Zone Firewalls` `Tailscale` `WireGuard` `Suricata IDS` `ntfy` `fail2ban` `ufw` `DNSSEC` `nftables` `Pi-hole` `Docker` `Jellyfin` `SMB/CIFS` `Raspberry Pi OS` `Linux Administration` `Bash` `systemd timers`
 
 *(Planned: Wazuh, Windows Server/AD, Kali, Kubernetes, Terraform, Azure/AWS)*

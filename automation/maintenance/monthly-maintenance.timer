@@ -1,0 +1,10 @@
+[Unit]
+Description=Run monthly maintenance at 2 AM on the 1st of each month
+
+[Timer]
+OnCalendar=*-*-01 02:00:00
+# Do not catch up on a missed run at some random later time
+Persistent=false
+
+[Install]
+WantedBy=timers.target

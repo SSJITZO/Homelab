@@ -1,0 +1,7 @@
+# /etc/maintenance/maintenance.conf  (chmod 600, owned by root, never in git)
+NTFY_URL="https://ntfy.sh/CHANGE-ME"
+REBOOT="auto"                          # auto | always | never
+VERIFY_SERVICES="pihole-FTL tailscaled"
+VERIFY_UFW=1
+VERIFY_DNS="127.0.0.1"
+#HOST_LABEL="pi1"
