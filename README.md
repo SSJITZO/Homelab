@@ -59,6 +59,14 @@ Full roadmap and certification mapping: [`docs/gap_closure_roadmap.md`](./docs/g
 
 ---
 
+## If cloud was involved
+
+How each part of this homelab would be designed in **AWS** and **Azure**: VLANs as VPC/VNet subnets, the zone firewall as security groups, NACLs and NSGs, the Tailscale subnet router as a site-to-site VPN, Pi-hole as Route 53 Resolver, Suricata as Traffic Mirroring or Network Firewall, and the patching and health-check automation as Systems Manager and Azure Update Manager. It includes the cloud labs completed (EC2 Auto Scaling, public/private VPC, site-to-site VPN, S3, Azure RBAC), a cost breakdown, and what I would move to the cloud versus keep on-prem.
+
+→ [`docs/if-cloud-was-involved.md`](./docs/if-cloud-was-involved.md)
+
+---
+
 ## Incident reports
 
 Real problems, diagnosed and resolved — not staged tutorials.
