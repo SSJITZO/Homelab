@@ -1,0 +1,10 @@
+[Unit]
+Description=Lab health checks with ntfy alerts
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/healthcheck.sh
+# A failed check is a normal outcome, not a broken unit
+SuccessExitStatus=1

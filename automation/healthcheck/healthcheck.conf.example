@@ -1,0 +1,6 @@
+# /etc/healthcheck/healthcheck.conf  (chmod 600, owned by root)
+# Copy this file, fill in the topic, and keep the real file out of git.
+NTFY_URL="https://ntfy.sh/CHANGE-ME"
+FAIL_THRESHOLD=2
+TIMEOUT=5
+#HOST_LABEL="proxmox"
