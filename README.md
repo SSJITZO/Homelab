@@ -47,6 +47,7 @@ This repo documents the real build: the architecture, the configs, and the actua
 - Configuration as code with Ansible: idempotent playbooks for the sensor baseline and the maintenance job, with per-host settings in host_vars and secrets kept out of git ([`ansible/`](./ansible))
 - Unattended monthly patching for the DNS server: full upgrade and Pi-hole update at 02:00, reboot only when required, a post-reboot health check and phone notifications ([`automation/maintenance/`](./automation/maintenance))
 - Real-time alert pipeline: Suricata and UniFi IPS alerts pushed to a phone via ntfy, with benign signatures triaged and suppressed in [`docs/suricata_alert_triage.md`](./docs/suricata_alert_triage.md)
+- Service health checks every 5 minutes with phone alerts on failure and recovery: two-failure threshold, no repeat alerts, proven by stopping a service on purpose ([`automation/healthcheck/`](./automation/healthcheck))
 
 ## In progress / roadmap
 
