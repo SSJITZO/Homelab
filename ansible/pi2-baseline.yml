@@ -1,0 +1,22 @@
+- name: Pi 2 baseline
+  hosts: pi2
+  become: true
+  tasks:
+    - name: Security packages are installed
+      ansible.builtin.apt:
+        name:
+          - fail2ban
+          - unattended-upgrades
+        state: present
+
+    - name: fail2ban is running and starts at boot
+      ansible.builtin.service:
+        name: fail2ban
+        state: started
+        enabled: true
+
+    - name: Suricata is running and starts at boot
+      ansible.builtin.service:
+        name: suricata
+        state: started
+        enabled: true

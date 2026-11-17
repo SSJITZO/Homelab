@@ -1,0 +1,10 @@
+# Managed by Ansible - edit host_vars/{{ inventory_hostname }}.yml, not this file.
+[Unit]
+Description=Run monthly maintenance at {{ maint_time }} on the 1st of each month
+
+[Timer]
+OnCalendar=*-*-01 {{ maint_time }}
+Persistent=false
+
+[Install]
+WantedBy=timers.target
