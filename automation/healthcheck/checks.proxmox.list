@@ -1,0 +1,11 @@
+# Checks run from Proxmox (Servers VLAN). Format: type  name  arg1  [arg2]
+# The Servers -> Trusted block means only DNS to Pi 1 is reachable from here,
+# which is exactly the path that broke on 2026-11-08.
+
+ping     internet          1.1.1.1
+dns      pihole-dns        192.168.10.20  example.com
+dns      public-dns        1.1.1.1        example.com
+http     nas-admin         http://192.168.20.22:9999/
+http     jellyfin          http://192.168.20.22:43199/health   Healthy
+http     proxmox-ui        https://127.0.0.1:8006/
+disk     proxmox-root      /              85
