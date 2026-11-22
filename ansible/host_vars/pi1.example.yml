@@ -1,0 +1,7 @@
+# Copy to host_vars/pi1.yml (not committed): it holds the notification topic.
+# Pi 1 is the DNS server and subnet router.
+ntfy_ops_url: "https://ntfy.sh/CHANGE-ME"
+maint_time: "02:00:00"
+verify_services: "pihole-FTL tailscaled"
+verify_ufw: 1
+verify_dns: "127.0.0.1"

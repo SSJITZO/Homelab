@@ -29,8 +29,8 @@ This repo documents the real build: the architecture, the configs, and the actua
 |---|---|---|
 | Pi 1 | Network-wide DNS filtering (Pi-hole, DNSSEC) + Tailscale subnet router, hardened ([details](./docs/pi1_hardening.md)) | ✅ Live |
 | Pi 2 | Intrusion detection sensor (Suricata, 52,985 active signatures, tuned suppressions) + host firewall (nftables); key-only SSH, fail2ban, automatic security updates, pinned DNS | ✅ Live |
-| Pi 3 | Self-hosted apps (Vaultwarden, Nextcloud) | 🔲 Planned |
-| Pi 4 | Observability (Grafana + Prometheus + Uptime Kuma) | 🔲 Planned |
+| Pi 3 | Self-hosted apps (Vaultwarden) and a log shipper for the SIEM. Hardened baseline done: boots from NVMe, key-only SSH, fail2ban, ufw, automatic updates, Tailscale, Ansible-managed ([build](./docs/pi3_pi4_baseline.md)) | 🟡 Base built, apps next |
+| Pi 4 | Observability (Prometheus, Grafana, Uptime Kuma) and a backup Pi-hole. Same hardened baseline as Pi 3, on the Trusted VLAN beside Pi 1 ([build](./docs/pi3_pi4_baseline.md)) | 🟡 Base built, monitoring next |
 
 **Remote access:** Tailscale (WireGuard-based mesh VPN). Pi 1 is the single subnet router for the Trusted and Servers VLANs; Proxmox and Pi 2 also run Tailscale directly. Access is governed by tailnet access rules (grants) and per-server key-expiry settings, with device approval next on the list. The old WireGuard server (PiVPN) has been removed along with its port forward, so the gateway has **zero port forwards: no inbound ports are open** on the WAN.
 
@@ -44,8 +44,8 @@ This repo documents the real build: the architecture, the configs, and the actua
 - Hypervisor-backed virtualization with NAS-integrated shared storage
 - Remote access via a Tailscale subnet router, replacing the original WireGuard server (double-NAT behind the ISP gateway diagnosed and resolved during the move)
 - A hardened DNS and remote-access host: key-only SSH, fail2ban, automatic security patching, DNSSEC and a default-deny host firewall rolled out behind an automatic rollback timer, each verified with a test ([`docs/pi1_hardening.md`](./docs/pi1_hardening.md))
-- Configuration as code with Ansible: idempotent playbooks for the sensor baseline and the maintenance job, with per-host settings in host_vars and secrets kept out of git ([`ansible/`](./ansible))
-- Unattended monthly patching for the DNS server: full upgrade and Pi-hole update at 02:00, reboot only when required, a post-reboot health check and phone notifications ([`automation/maintenance/`](./automation/maintenance))
+- Configuration as code with Ansible across all four Pis: idempotent playbooks for the sensor baseline and the fleet-wide maintenance job, with per-host settings in host_vars and secrets kept out of git ([`ansible/`](./ansible))
+- Unattended monthly patching on every Pi, staggered by host (DNS server first at 02:00): full upgrade, Pi-hole update where installed, reboot only when required, a per-host post-reboot health check and phone notifications ([`automation/maintenance/`](./automation/maintenance))
 - Real-time alert pipeline: Suricata and UniFi IPS alerts pushed to a phone via ntfy, with benign signatures triaged and suppressed in [`docs/suricata_alert_triage.md`](./docs/suricata_alert_triage.md)
 
 ## In progress / roadmap
@@ -72,6 +72,7 @@ How each part of this homelab would be designed in **AWS** and **Azure**: VLANs 
 
 Real problems, diagnosed and resolved — not staged tutorials.
 
+- [**2026-11-20 — Pi 3 build: SSH near-lockout (key never installed) and a failing USB boot drive, rebuilt on NVMe**](./incident-reports/2026-11-20-pi3-boot-drive-failure-and-ssh-near-lockout.md)
 - [**2026-11-08 — Servers VLAN losing DNS: missing allow, rule-ID ordering, and Pi-hole ignoring routed clients**](./incident-reports/2026-11-08-servers-vlan-dns-failure.md)
 - [**2026-11-05 — Remote access to the Servers VLAN failing: duplicate subnet router + a block rule dropping replies**](./incident-reports/2026-11-05-tailscale-subnet-route-conflict.md)
 - [**2026-09-27 — Suricata false "no detections" after relocation, root cause: self-referential DNS**](./incident-reports/2026-09-27-suricata-dns-after-move.md)

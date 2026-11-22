@@ -1,0 +1,8 @@
+# Copy to host_vars/pi4.yml (not committed): it holds the notification topic.
+# Pi 4 is the monitoring host; add pihole-FTL to verify_services once the
+# backup Pi-hole is installed.
+ntfy_ops_url: "https://ntfy.sh/CHANGE-ME"
+maint_time: "03:30:00"
+verify_services: "fail2ban tailscaled"
+verify_ufw: 1
+verify_dns: "1.1.1.1"
