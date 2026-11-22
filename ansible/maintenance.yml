@@ -2,11 +2,12 @@
 # The same playbook works for any machine; what differs (time, services to
 # verify, notification topic) lives in host_vars/<host>.yml.
 #
-#   ansible-playbook maintenance.yml -K            install / bring up to date
-#   ansible-playbook maintenance.yml -K --check    show what would change
+#   ansible-playbook maintenance.yml -K                   install / bring up to date on every Pi
+#   ansible-playbook maintenance.yml -K --limit pi3       one host at a time
+#   ansible-playbook maintenance.yml -K --check --diff    show what would change
 
 - name: Monthly maintenance job
-  hosts: pi2
+  hosts: pis
   become: true
 
   tasks:
@@ -60,10 +61,13 @@
     - name: systemd has read any new or changed units
       ansible.builtin.meta: flush_handlers
 
+    # On a brand-new host the unit files above are only simulated in --check
+    # mode, so systemd cannot find them yet; skip this step in a preview.
     - name: Boot check is enabled
       ansible.builtin.systemd:
         name: maintenance-verify.service
         enabled: true
+      when: not ansible_check_mode
 
     - name: Timer is enabled and running
       ansible.builtin.systemd:
